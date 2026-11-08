@@ -1,0 +1,13 @@
+{
+  "base_url": "https://api.galaxium.art",
+  "api_key": "YOUR_API_KEY_HERE",
+  "auth": {
+    "header": "Authorization",
+    "prefix": "Bearer "
+  },
+  "timeout": 30,
+  "inbox_store": "inboxes.json",
+  "hide_domains": [
+    "rape", "loliporn", "nigger", "foid", "mcvirgins", "killall", "mossad", "getfucked"
+  ]
+}

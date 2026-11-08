@@ -1,0 +1,10 @@
+config.json
+inboxes.json
+inboxes.json.tmp
+*.log
+*.png
+__pycache__/
+*.pyc
+awesome-ai-agents/
+fernhollow-standalone.html
+.vercel/

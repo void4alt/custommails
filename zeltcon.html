@@ -1,0 +1,2316 @@
+<!doctype html>
+<html lang="en" style="background:#070707;color-scheme:dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+<title>Zeltcon Checker · Disposable Email & Instant OTP Verification</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /*
+   * Measured Verbatim from lorenzolottici.it
+   * Reused for Zeltcon Checker Dark Luxury Interface
+   */
+  :root {
+    --z-banda: 8000;
+    --z-parliamone: 9000;
+    --z-voce-cabina: 9100;
+    --z-passaggio: 10000;
+    --z-velo-scritta: 10001;
+    --z-indice: 2147480000;
+    --z-salta: 2147480000;
+    --gutter: clamp(1.25rem, 3.4vw, 4rem);
+    --corsia-bordo: 4rem;
+    --tipo-marchio: clamp(19.8125rem, calc(10.7321rem + 10.0893vw), 26.875rem);
+    --tipo-display: clamp(1.4375rem, calc(.2rem + 1.75vw), 2.3rem);
+    --tipo-titolo: clamp(1.4375rem, calc(.2rem + 1.75vw), 2.3rem);
+    --tipo-sottotitolo: clamp(1.25rem, calc(1rem + .55vw), 1.55rem);
+    --tipo-servizio: clamp(1.25rem, calc(1rem + .55vw), 1.55rem);
+    --tipo-lead: clamp(16.5px, calc(.9375rem + .1042vw), min(1.125rem, 20px));
+    --tipo-corpo: clamp(16.5px, calc(.9375rem + .1042vw), min(1.125rem, 20px));
+    --tipo-nota: clamp(13px, calc(.75rem + .14vw), 15px);
+    --tipo-label: clamp(13px, calc(.75rem + .14vw), 15px);
+    --tipo-micro: clamp(13px, calc(.75rem + .14vw), 15px);
+    --lh-hero: .96;
+    --lh-display: .98;
+    --lh-titolo: .98;
+    --lh-scheda: 1.6;
+    --lh-riga: 1.6;
+    --lh-voce: 1.6;
+    --lh-corpo: 1.6;
+    --lh-label: 1.35;
+    --ls-hero: -.02em;
+    --ls-display: -.02em;
+    --ls-titolo: -.02em;
+    --ls-scheda: .01em;
+    --ls-riga: .07em;
+    --ls-testo: .07em;
+    --ls-label: .08em;
+    --wdth-display: 92;
+    --wdth-titolo: 94;
+    --wdth-scheda: 96;
+    --wdth-testo: 100;
+    --peso-hero: 600;
+    --peso-display: 600;
+    --peso-titolo: 600;
+    --peso-scheda: 600;
+    --peso-riga: 500;
+    --peso-corpo: 400;
+    --peso-label: 400;
+    --peso-comando: 500;
+    --ls-mono: 0;
+    --tipo-hero-mano: clamp(1.875rem, min(11vw, 5.1vh), 2.75rem);
+
+    /* Surface & accent colors measured from live page */
+    --surface-dark: #070707;
+    --surface-semi: #07070799;
+    --border-inset: #f0ede852;
+    --color-text: #f0ede8;
+    --caldo: #d8b48c;
+    --caldo-glow: rgba(216, 180, 140, 0.25);
+    --danger: #e5484d;
+    --success: #4cc38a;
+
+    /* Font tokens */
+    --font-archivo: "Archivo", system-ui, -apple-system, sans-serif;
+    --font-jetbrains: "JetBrains Mono", "Geist Mono", ui-monospace, monospace;
+
+    /* Exact spacing tokens measured from live page */
+    --sp-4: 4px;
+    --sp-4-3: 4.3216px;
+    --sp-12: 12px;
+    --sp-16: 16px;
+    --sp-21-6: 21.6px;
+    --sp-23-4: 23.4px;
+    --sp-48-96: 48.96px;
+    --sp-149-12: 149.12px;
+
+    /* Luxury ease */
+    --curva: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #070707;
+      --foreground: #F0EDE8;
+      --link: #F0EDE8;
+      --muted-1: transparent;
+    }
+  }
+
+  /* ---- Named Keyframe Animations (Measured from live page) ---- */
+  @keyframes shimmer {
+    0% { opacity: 0.65; }
+    50% { opacity: 1; }
+    100% { opacity: 0.65; }
+  }
+
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes v2-parte {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-100%); opacity: 0; }
+  }
+
+  @keyframes v2-arriva {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes segno-sorge {
+    0% { transform: scale(0.94); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes segno-orbita {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes segno-scarica {
+    0% { transform: translateY(-3px); }
+    50% { transform: translateY(3px); }
+    100% { transform: translateY(-3px); }
+  }
+
+  @keyframes segno-gira {
+    0% { transform: rotate3d(1, 1, 0, 0deg); }
+    100% { transform: rotate3d(1, 1, 0, 360deg); }
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.6; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    background-color: var(--surface-dark);
+    color: var(--color-text);
+    font-family: var(--font-archivo);
+    font-size: 16.5005px;
+    line-height: 26.4008px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* Background Dust & Stipple Texture from lorenzolottici.it */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(240, 237, 232, 0.04) 1px, transparent 0),
+      radial-gradient(circle at 7px 19px, rgba(240, 237, 232, 0.07) 0.8px, transparent 1.4px);
+    background-size: 16px 16px, 53px 47px;
+    opacity: 0.75;
+  }
+
+  /* Custom Cursor Follower */
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-text);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-indice);
+    transform: translate(-50%, -50%);
+    transition: width 0.2s var(--curva), height 0.2s var(--curva);
+  }
+  .cursor-ring {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(240, 237, 232, 0.35);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: calc(var(--z-indice) - 1);
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease-out, width 0.25s var(--curva), height 0.25s var(--curva), border-color 0.25s;
+  }
+  body.hovering .cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-color: var(--caldo);
+  }
+
+  @media (pointer: coarse) {
+    .cursor-dot, .cursor-ring {
+      display: none !important;
+    }
+  }
+
+  /* Typography Scales */
+  h1 {
+    font-size: 44px;
+    line-height: var(--lh-hero);
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #f0ede8;
+    letter-spacing: var(--ls-hero);
+  }
+
+  h2 {
+    font-size: 16.5005px;
+    line-height: var(--lh-titolo);
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #f0ede8;
+    letter-spacing: var(--ls-titolo);
+  }
+
+  a {
+    color: #f0ede8;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  a:hover { opacity: 0.75; }
+
+  /* Exact Button Style 1 from measured live page */
+  button.btn-lorenzo {
+    background: transparent;
+    color: #f0ede8;
+    border-radius: 0px;
+    padding: 0px;
+    font-size: 16.608px;
+    font-weight: 500;
+    font-family: var(--font-archivo);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    transition: opacity 0.2s var(--curva), transform 0.15s;
+  }
+  button.btn-lorenzo:hover {
+    opacity: 0.75;
+    transform: translateY(-1px);
+  }
+
+  .inset-border-card {
+    box-shadow: #f0ede852 0px 0px 0px 1px inset;
+    background: var(--surface-semi);
+    backdrop-filter: blur(16px);
+  }
+
+  /* ---- Header Navigation ---- */
+  header.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--gutter);
+    z-index: var(--z-banda);
+    background: rgba(7, 7, 7, 0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(240, 237, 232, 0.08);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-logo-box {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #f0ede852;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-jetbrains);
+    font-size: 11px;
+    font-weight: 600;
+    background: #070707;
+  }
+  .nav-logo-box canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  .nav-brand-text {
+    font-size: 14.016px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .nav-brand-sub {
+    font-family: var(--font-jetbrains);
+    font-size: 11.5px;
+    color: var(--caldo);
+    margin-left: 6px;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-23-4);
+  }
+  .nav-menu button.btn-lorenzo {
+    font-size: 14.016px;
+  }
+  .nav-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid rgba(240, 237, 232, 0.16);
+    font-family: var(--font-jetbrains);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--success);
+  }
+  .nav-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 6px var(--success);
+    animation: pulseDot 2s infinite ease-in-out;
+  }
+
+  /* ---- Main Container ---- */
+  main.page-main {
+    position: relative;
+    z-index: 10;
+    padding-top: 64px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- Section 1: Hero & Real-time Console ---- */
+  section.hero-section {
+    min-height: calc(100vh - 64px);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--sp-48-96) var(--gutter);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content-grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(360px, 520px);
+    gap: var(--sp-48-96);
+    align-items: start;
+    flex: 1;
+    margin: var(--sp-21-6) 0;
+  }
+
+  .hero-editorial-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-21-6);
+    animation: revealUp 0.8s var(--curva);
+  }
+  .hero-mono-kicker {
+    font-family: var(--font-jetbrains);
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-label);
+    color: var(--caldo);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-main-h1 {
+    font-size: clamp(32px, 4.5vw, 54px);
+    line-height: 1.02;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #f0ede8;
+    max-width: 17ch;
+  }
+  .hero-lead-text {
+    font-size: 16.5005px;
+    line-height: 26.4008px;
+    color: rgba(240, 237, 232, 0.78);
+    max-width: 42ch;
+  }
+
+  .hero-metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-16);
+    margin-top: var(--sp-12);
+    border-top: 1px solid rgba(240, 237, 232, 0.1);
+    padding-top: var(--sp-16);
+  }
+  .hero-metric-item {
+    font-family: var(--font-jetbrains);
+    font-size: 12px;
+    color: rgba(240, 237, 232, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-metric-val {
+    font-size: 15px;
+    font-weight: 600;
+    color: #f0ede8;
+  }
+
+  .hero-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-23-4);
+    margin-top: var(--sp-16);
+  }
+  .hero-btn-cta {
+    padding: 12px 24px;
+    background: #f0ede8;
+    color: #070707;
+    font-family: var(--font-archivo);
+    font-size: 14.016px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .hero-btn-cta:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* ---- Dedicated Zeltcon Checker Console ---- */
+  .hero-app-console {
+    box-shadow: #f0ede852 0px 0px 0px 1px inset;
+    background: rgba(10, 11, 14, 0.9);
+    backdrop-filter: blur(28px);
+    border-radius: 0px;
+    padding: var(--sp-23-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-16);
+    animation: segno-sorge 0.9s var(--curva);
+  }
+
+  .console-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(240, 237, 232, 0.12);
+    padding-bottom: var(--sp-12);
+  }
+  .console-label {
+    font-family: var(--font-jetbrains);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--caldo);
+  }
+  .console-status {
+    font-family: var(--font-jetbrains);
+    font-size: 11px;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .console-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 6px var(--success);
+  }
+
+  /* Active Mailbox Banner */
+  .console-inbox-display {
+    padding: 12px 14px;
+    background: #070707;
+    border: 1px solid rgba(240, 237, 232, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .console-address-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .console-address-tag {
+    font-family: var(--font-jetbrains);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(240, 237, 232, 0.5);
+  }
+  .console-address-text {
+    font-family: var(--font-jetbrains);
+    font-size: 13.5px;
+    color: #f0ede8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .console-inbox-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .btn-address-copy {
+    padding: 6px 12px;
+    background: #f0ede8;
+    color: #070707;
+    font-family: var(--font-archivo);
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-address-copy:hover {
+    background: #fff;
+  }
+
+  /* Controls to Create / Switch Mailbox */
+  .console-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .console-field {
+    width: 100%;
+    height: 38px;
+    background: #070707;
+    border: 1px solid rgba(240, 237, 232, 0.18);
+    color: #f0ede8;
+    font-family: var(--font-jetbrains);
+    font-size: 12.5px;
+    padding: 0 10px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .console-field:focus {
+    border-color: var(--caldo);
+  }
+
+  .console-actions-grid {
+    display: flex;
+    gap: 8px;
+  }
+  .console-primary-btn {
+    flex: 1;
+    height: 38px;
+    background: rgba(240, 237, 232, 0.12);
+    color: #f0ede8;
+    border: 1px solid rgba(240, 237, 232, 0.25);
+    font-family: var(--font-archivo);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .console-primary-btn:hover {
+    background: #f0ede8;
+    color: #070707;
+    border-color: #f0ede8;
+  }
+
+  .console-icon-btn {
+    width: 38px;
+    height: 38px;
+    background: transparent;
+    border: 1px solid rgba(240, 237, 232, 0.2);
+    color: #f0ede8;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    transition: border-color 0.2s, background 0.15s;
+  }
+  .console-icon-btn:hover {
+    border-color: var(--caldo);
+    background: rgba(216, 180, 140, 0.08);
+  }
+
+  /* Tactile Parchment Hero OTP Card */
+  .parchment-otp-badge {
+    background: #eae5da;
+    color: #14140f;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    box-shadow: inset 0 1px 0 rgba(20, 20, 15, 0.25), 0 8px 24px rgba(0, 0, 0, 0.5);
+    border-left: 4px solid var(--caldo);
+    animation: revealUp 0.35s var(--curva);
+  }
+  .parchment-otp-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .parchment-otp-sub {
+    font-family: var(--font-jetbrains);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(20, 20, 15, 0.7);
+  }
+  .parchment-otp-code {
+    font-family: var(--font-jetbrains);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #14140f;
+  }
+  .parchment-copy-btn {
+    background: #14140f;
+    color: #f0ede8;
+    border: none;
+    padding: 8px 14px;
+    font-family: var(--font-archivo);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .parchment-copy-btn:hover {
+    opacity: 0.85;
+  }
+
+  /* Feed Tabs & Search */
+  .console-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(240, 237, 232, 0.1);
+  }
+  .console-tabs {
+    display: flex;
+  }
+  .console-tab-btn {
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    color: rgba(240, 237, 232, 0.5);
+    font-family: var(--font-archivo);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .console-tab-btn.active {
+    color: #f0ede8;
+    border-bottom-color: var(--caldo);
+  }
+
+  .console-search-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(240, 237, 232, 0.12);
+    color: #f0ede8;
+    font-family: var(--font-jetbrains);
+    font-size: 11.5px;
+    padding: 4px 8px;
+    width: 130px;
+    outline: none;
+    text-align: right;
+  }
+  .console-search-input:focus {
+    border-color: var(--caldo);
+  }
+
+  /* Dispatches Message List */
+  .console-msg-list {
+    max-height: 220px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 4px;
+  }
+  .console-msg-list::-webkit-scrollbar {
+    width: 4px;
+  }
+  .console-msg-list::-webkit-scrollbar-thumb {
+    background: rgba(240, 237, 232, 0.2);
+  }
+
+  .console-msg-row {
+    padding: 10px 12px;
+    background: rgba(7, 7, 7, 0.65);
+    border: 1px solid rgba(240, 237, 232, 0.08);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
+  }
+  .console-msg-row:hover, .console-msg-row.active {
+    background: #14161f;
+    border-color: var(--caldo);
+  }
+  .console-msg-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+  .console-msg-from {
+    color: #f0ede8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 65%;
+  }
+  .console-msg-time {
+    font-family: var(--font-jetbrains);
+    font-size: 11px;
+    color: rgba(240, 237, 232, 0.5);
+  }
+  .console-msg-subj {
+    font-size: 12px;
+    color: rgba(240, 237, 232, 0.75);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .console-msg-otp-tag {
+    position: absolute;
+    top: 10px;
+    right: 68px;
+    background: var(--caldo);
+    color: #070707;
+    font-family: var(--font-jetbrains);
+    font-size: 9.5px;
+    font-weight: 600;
+    padding: 1px 5px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Hero Bottom Bar */
+  .hero-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-16);
+    padding-top: var(--sp-21-6);
+    border-top: 1px solid rgba(240, 237, 232, 0.1);
+    font-family: var(--font-jetbrains);
+    font-size: 13px;
+    color: rgba(240, 237, 232, 0.6);
+  }
+  .hero-links-cluster {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-23-4);
+  }
+
+  /* ---- Section 2: ENGINE CAPABILITIES ---- */
+  section.features-section {
+    padding: var(--sp-149-12) var(--gutter);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-48-96);
+    border-top: 1px solid rgba(240, 237, 232, 0.08);
+  }
+
+  .section-headline-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(240, 237, 232, 0.12);
+    padding-bottom: var(--sp-16);
+  }
+  .section-headline-title {
+    font-size: 44px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-titolo);
+  }
+  .section-headline-meta {
+    font-family: var(--font-jetbrains);
+    font-size: 14.016px;
+    color: var(--caldo);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--sp-23-4);
+  }
+
+  .feature-card {
+    position: relative;
+    box-shadow: #f0ede852 0px 0px 0px 1px inset;
+    background: var(--surface-dark);
+    padding: var(--sp-48-96) var(--sp-23-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+    transition: transform 0.45s var(--curva), box-shadow 0.45s;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: rgba(240, 237, 232, 0.6) 0px 0px 0px 1px inset;
+  }
+  .feature-kicker {
+    font-family: var(--font-jetbrains);
+    font-size: 12px;
+    color: var(--caldo);
+    margin-bottom: var(--sp-16);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .feature-title {
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.15;
+    color: #f0ede8;
+    margin-bottom: var(--sp-12);
+  }
+  .feature-desc {
+    font-size: 14.5px;
+    line-height: 23px;
+    color: rgba(240, 237, 232, 0.7);
+  }
+  .feature-card-btn {
+    margin-top: var(--sp-21-6);
+    font-family: var(--font-jetbrains);
+    font-size: 12px;
+    color: var(--caldo);
+  }
+
+  /* ---- Section 3: TECHNICAL ARCHITECTURE ---- */
+  section.specs-section {
+    padding: var(--sp-149-12) var(--gutter);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-48-96);
+    border-top: 1px solid rgba(240, 237, 232, 0.08);
+  }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--sp-23-4);
+  }
+
+  .spec-card {
+    box-shadow: #f0ede852 0px 0px 0px 1px inset;
+    background: var(--surface-semi);
+    padding: var(--sp-48-96) var(--sp-23-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 320px;
+  }
+  .spec-num {
+    font-family: var(--font-jetbrains);
+    font-size: 13px;
+    color: var(--caldo);
+    margin-bottom: var(--sp-16);
+  }
+  .spec-statement {
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #f0ede8;
+    letter-spacing: -0.02em;
+  }
+  .spec-desc {
+    margin-top: var(--sp-16);
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(240, 237, 232, 0.65);
+  }
+
+  /* ---- Section 4: CTA / ACTION ---- */
+  section.cta-section {
+    padding: var(--sp-149-12) var(--gutter);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-48-96);
+    border-top: 1px solid rgba(240, 237, 232, 0.08);
+  }
+
+  .cta-box {
+    box-shadow: #f0ede852 0px 0px 0px 1px inset;
+    background: var(--surface-semi);
+    padding: var(--sp-48-96) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-23-4);
+  }
+  .cta-box h1 {
+    font-size: clamp(34px, 5.5vw, 62px);
+    line-height: 0.98;
+    max-width: 16ch;
+  }
+
+  /* ---- Section 5: FOOTER ---- */
+  footer.page-footer {
+    background: #070707;
+    border-top: 1px solid rgba(240, 237, 232, 0.12);
+    padding: var(--sp-48-96) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-23-4);
+  }
+
+  .footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-16);
+  }
+  .footer-brand {
+    font-family: var(--font-archivo);
+    font-size: 16.5005px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .footer-social-cluster {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-23-4);
+  }
+  .footer-copyright {
+    font-family: var(--font-jetbrains);
+    font-size: 12.5px;
+    color: rgba(240, 237, 232, 0.45);
+  }
+
+  /* ---- Lorenzo Lottici Scheda Modal Overlay (Message Reader) ---- */
+  .scheda-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 7, 7, 0.88);
+    backdrop-filter: blur(18px);
+    display: none;
+    place-items: center;
+    z-index: var(--z-parliamone);
+    padding: 24px;
+  }
+  .scheda-overlay.open { display: grid; }
+  .scheda-box {
+    background: #eae5da;
+    color: #14140f;
+    box-shadow: inset 0 1px 0 rgba(20, 20, 15, 0.25), 0 24px 64px rgba(0, 0, 0, 0.9);
+    width: 100%;
+    max-width: 720px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    animation: revealUp 0.3s var(--curva);
+    position: relative;
+    overflow: hidden;
+  }
+  .scheda-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(20, 20, 15, 0.12);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(20, 20, 15, 0.02);
+  }
+  .scheda-title {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #14140f;
+  }
+  .scheda-meta {
+    font-family: var(--font-jetbrains);
+    font-size: 12px;
+    color: rgba(20, 20, 15, 0.7);
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .scheda-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    font-weight: 400;
+    color: #14140f;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    transition: opacity 0.15s;
+  }
+  .scheda-close-btn:hover { opacity: 0.6; }
+
+  .scheda-tabs-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid rgba(20, 20, 15, 0.1);
+    background: rgba(20, 20, 15, 0.03);
+  }
+  .scheda-view-tab {
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    font-family: var(--font-archivo);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgba(20, 20, 15, 0.5);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .scheda-view-tab.active {
+    color: #14140f;
+    border-bottom-color: #14140f;
+  }
+
+  .scheda-body {
+    padding: 24px;
+    overflow-y: auto;
+    font-size: 14.5px;
+    line-height: 24px;
+    color: #14140f;
+    flex: 1;
+  }
+  .scheda-body pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--font-jetbrains);
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .scheda-body iframe {
+    width: 100%;
+    height: 380px;
+    border: 1px solid rgba(20, 20, 15, 0.15);
+    background: #ffffff;
+  }
+
+  .scheda-attachments {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(20, 20, 15, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .scheda-att-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(20, 20, 15, 0.08);
+    font-family: var(--font-jetbrains);
+    font-size: 12px;
+    color: #14140f;
+    text-decoration: none;
+  }
+  .scheda-att-chip:hover {
+    background: rgba(20, 20, 15, 0.15);
+  }
+
+  .scheda-footer {
+    padding: 14px 24px;
+    border-top: 1px solid rgba(20, 20, 15, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(20, 20, 15, 0.04);
+  }
+
+  /* ---- Saved Inboxes Modal / Drawer ---- */
+  .inbox-list-item {
+    padding: 12px 14px;
+    background: rgba(7, 7, 7, 0.4);
+    border: 1px solid rgba(240, 237, 232, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .inbox-list-item.current {
+    border-color: var(--caldo);
+    background: rgba(216, 180, 140, 0.08);
+  }
+
+  /* Toast Notification */
+  .toast-box {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #14161f;
+    box-shadow: #f0ede852 0px 0px 0px 1px inset;
+    padding: 10px 20px;
+    font-family: var(--font-jetbrains);
+    font-size: 13px;
+    color: #f0ede8;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s var(--curva), transform 0.2s var(--curva);
+    z-index: var(--z-velo-scritta);
+  }
+  .toast-box.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  @media (max-width: 900px) {
+    .hero-content-grid {
+      grid-template-columns: 1fr;
+    }
+    .nav-menu {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor Elements -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- Top Navigation Header -->
+<header class="nav-header">
+  <div class="nav-brand">
+    <div class="nav-logo-box" id="3d-logo-canvas" title="Zeltcon Kinetic Core">
+      <!-- Three.js Kinetic Geometry mounts here -->
+    </div>
+    <div class="nav-brand-text">ZELTCON CHECKER</div>
+    <div class="nav-brand-sub">· DISPATCH ENGINE</div>
+  </div>
+
+  <nav class="nav-menu">
+    <a href="/fernhollow"><button class="btn-lorenzo" style="color:var(--caldo);font-weight:600">FERNHOLLOW 3D HERO ↗</button></a>
+    <button class="btn-lorenzo" id="btn-nav-inboxes">SAVED INBOXES (<span id="nav-inbox-count">0</span>)</button>
+    <a href="#features"><button class="btn-lorenzo">FEATURES</button></a>
+    <a href="#specs"><button class="btn-lorenzo">ARCHITECTURE</button></a>
+    <button class="btn-lorenzo" id="btn-nav-docs">API DOCS</button>
+  </nav>
+
+  <div class="nav-status-pill" id="nav-status-indicator">
+    <span class="nav-status-dot"></span>
+    <span id="nav-proxy-label">PROXY LIVE</span>
+  </div>
+</header>
+
+<main class="page-main">
+
+  <!-- =========================================================================
+       SECTION 1: HERO & LIVE TEMP MAIL DISPATCH CONSOLE
+       ========================================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="hero-content-grid">
+      <!-- Left: Editorial Content -->
+      <div class="hero-editorial-wrap">
+        <div class="hero-mono-kicker">
+          <span>REAL-TIME VERIFICATION ENGINE</span>
+          <span>/</span>
+          <span>ZERO RETENTION</span>
+        </div>
+        <h1 class="hero-main-h1">DISPOSABLE INBOXES. INSTANT OTP RESOLUTION.</h1>
+        <p class="hero-lead-text">
+          Generate ephemeral email inboxes in milliseconds. Stream incoming transactional dispatches, extract authentication tokens with letterpress clarity, and eliminate sign-up friction with zero tracking.
+        </p>
+
+        <div class="hero-metrics-row">
+          <div class="hero-metric-item">
+            <span>POLL INTERVAL</span>
+            <span class="hero-metric-val">6 SECONDS</span>
+          </div>
+          <div class="hero-metric-item">
+            <span>OTP DETECTION</span>
+            <span class="hero-metric-val">NUMERIC + G-CODES</span>
+          </div>
+          <div class="hero-metric-item">
+            <span>STORAGE</span>
+            <span class="hero-metric-val">EPHEMERAL CACHE</span>
+          </div>
+        </div>
+
+        <div class="hero-btn-row">
+          <button class="hero-btn-cta" id="btn-hero-random">⚡ CREATE RANDOM INBOX</button>
+          <button class="btn-lorenzo" id="btn-hero-manage">MANAGE INBOXES</button>
+          <button class="btn-lorenzo" id="btn-hero-privacy">PRIVACY POLICY</button>
+        </div>
+      </div>
+
+      <!-- Right: Live Zeltcon Checker Dispatch Console -->
+      <div class="hero-app-console">
+        <div class="console-top">
+          <div class="console-label">ZELTCON CHECKER // CONSOLE</div>
+          <div class="console-status">
+            <span class="console-dot"></span>
+            <span id="console-live-tag">LIVE PROXY ACTIVE</span>
+          </div>
+        </div>
+
+        <!-- Active Mailbox Display Banner -->
+        <div class="console-inbox-display">
+          <div class="console-address-group">
+            <span class="console-address-tag">Active Mailbox</span>
+            <span class="console-address-text" id="console-address-label">Generating mailbox...</span>
+          </div>
+          <div class="console-inbox-actions">
+            <button class="btn-address-copy" id="btn-console-copy" title="Copy email address to clipboard">COPY</button>
+            <button class="btn-lorenzo" id="btn-console-switch" style="font-size:12px;color:var(--caldo)" title="Switch between saved mailboxes">LIST ▾</button>
+          </div>
+        </div>
+
+        <!-- Controls to Create Custom or Random -->
+        <div class="console-inputs">
+          <input class="console-field" id="console-local-user" placeholder="username (optional)" autocomplete="off" spellcheck="false">
+          <select class="console-field" id="console-domain-select">
+            <option value="">Loading domains...</option>
+          </select>
+        </div>
+
+        <div class="console-actions-grid">
+          <button class="console-primary-btn" id="btn-console-create">Create Custom</button>
+          <button class="console-icon-btn" id="btn-console-random" title="Create Random Mailbox">⚡</button>
+          <button class="console-icon-btn" id="btn-console-refresh" title="Refresh Messages">↻</button>
+          <button class="console-icon-btn" id="btn-console-clear" title="Forget Current Mailbox" style="color:var(--danger)">✕</button>
+        </div>
+
+        <!-- Hero Tactile Parchment OTP Card -->
+        <div class="parchment-otp-badge" id="console-otp-card" style="display:none">
+          <div class="parchment-otp-left">
+            <div class="parchment-otp-sub">Extracted Verification Code</div>
+            <div class="parchment-otp-code" id="console-otp-digits">------</div>
+          </div>
+          <button class="parchment-copy-btn" id="btn-copy-otp">Copy Code</button>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="console-filter-bar">
+          <div class="console-tabs">
+            <button class="console-tab-btn active" id="tab-console-inbox">Inbox (<span id="inbox-count-span">0</span>)</button>
+            <button class="console-tab-btn" id="tab-console-spam">Spam (<span id="spam-count-span">0</span>)</button>
+          </div>
+          <input class="console-search-input" id="console-search-box" placeholder="Filter..." autocomplete="off">
+        </div>
+
+        <!-- Dispatches Message List -->
+        <div class="console-msg-list" id="console-msg-container">
+          <div style="font-size:12px;color:rgba(240,237,232,0.4);text-align:center;padding:28px 0">
+            Waiting for incoming dispatches...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Bottom Bar -->
+    <div class="hero-bottom-bar">
+      <div>ZELTCON CHECKER · EPHEMERAL DISPATCH ARCHITECTURE</div>
+      <div class="hero-links-cluster">
+        <button class="btn-lorenzo" id="btn-bottom-clear">CLEAR STORED DATA</button>
+        <button class="btn-lorenzo" id="btn-bottom-privacy">PRIVACY</button>
+        <button class="btn-lorenzo" id="btn-bottom-cookies">COOKIES</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2: ENGINE CAPABILITIES (Measured Card Grid)
+       ========================================================================= -->
+  <section class="features-section" id="features">
+    <div class="section-headline-row">
+      <div class="section-headline-title">CAPABILITIES</div>
+      <div class="section-headline-meta">01 / DISPATCH PROTOCOL</div>
+    </div>
+
+    <div class="features-grid">
+      <!-- Card 1: OTP Resolution -->
+      <article class="feature-card">
+        <div>
+          <div class="feature-kicker">01 // TELEMETRY</div>
+          <h3 class="feature-title">INSTANT OTP EXTRACTION</h3>
+          <p class="feature-desc">
+            Multi-pattern RegEx engine automatically isolates 4–8 digit verification codes, hyphenated codes, and Google G-codes as soon as the email envelope touches the proxy.
+          </p>
+        </div>
+        <button class="btn-lorenzo feature-card-btn" id="btn-card-otp-info">EXTRACTOR SPECS ↗</button>
+      </article>
+
+      <!-- Card 2: Zero Retention -->
+      <article class="feature-card">
+        <div>
+          <div class="feature-kicker">02 // CRYPTOGRAPHY</div>
+          <h3 class="feature-title">ZERO-RETENTION CACHE</h3>
+          <p class="feature-desc">
+            No long-term databases. Messages and identities are maintained on ephemeral memory layers and wiped clean on demand or after their expiration threshold.
+          </p>
+        </div>
+        <button class="btn-lorenzo feature-card-btn" id="btn-card-privacy-info">PRIVACY POLICY ↗</button>
+      </article>
+
+      <!-- Card 3: Multi-Domain Pool -->
+      <article class="feature-card">
+        <div>
+          <div class="feature-kicker">03 // INFRASTRUCTURE</div>
+          <h3 class="feature-title">ROTATING DOMAIN POOL</h3>
+          <p class="feature-desc">
+            Fresh domains backed by configured SPF, DKIM, and MX records to ensure reliable delivery from top authentication providers and services.
+          </p>
+        </div>
+        <button class="btn-lorenzo feature-card-btn" id="btn-card-domain-info">VIEW DOMAINS ↗</button>
+      </article>
+
+      <!-- Card 4: REST API Proxy -->
+      <article class="feature-card">
+        <div>
+          <div class="feature-kicker">04 // AUTOMATION</div>
+          <h3 class="feature-title">DEVELOPER REST PROXY</h3>
+          <p class="feature-desc">
+            Zero-dependency native endpoints (`/api/inboxes`, `/api/messages`, `/api/message`) engineered for headless integration with Playwright, Cypress, and CI/CD tests.
+          </p>
+        </div>
+        <button class="btn-lorenzo feature-card-btn" id="btn-card-api-info">API DOCUMENTATION ↗</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 3: ARCHITECTURE (Measured 3-Column Thinking Grid)
+       ========================================================================= -->
+  <section class="specs-section" id="specs">
+    <div class="section-headline-row">
+      <div class="section-headline-title">ARCHITECTURE</div>
+      <div class="section-headline-meta">02 / PROTOCOL SPECIFICATIONS</div>
+    </div>
+
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div>
+          <div class="spec-num">01 / SUB-SECOND POLLING</div>
+          <div class="spec-statement">EVERY INCOMING DISPATCH RESOLVES IN SILENT REACTION LOOPS.</div>
+          <p class="spec-desc">
+            Reactive background polling keeps your inbox synchronized without full-page reloads, displaying dispatches the moment upstream MX nodes accept delivery.
+          </p>
+        </div>
+        <div style="margin-top:var(--sp-21-6)">
+          <span style="font-family:var(--font-jetbrains);font-size:12px;color:var(--caldo)">LATENCY: &lt; 150MS</span>
+        </div>
+      </div>
+
+      <div class="spec-card">
+        <div>
+          <div class="spec-num">02 / LETTERPRESS EXTRACTION</div>
+          <div class="spec-statement">VERIFICATION CODES ELEVATED BEFORE YOU EVEN OPEN THE BODY.</div>
+          <p class="spec-desc">
+            Tactile parchment cards isolate tokens instantly, allowing one-click copy straight into your clipboard without inspecting email formatting or markup.
+          </p>
+        </div>
+        <div style="margin-top:var(--sp-21-6)">
+          <span style="font-family:var(--font-jetbrains);font-size:12px;color:var(--caldo)">PARSER: REGEX V2</span>
+        </div>
+      </div>
+
+      <div class="spec-card">
+        <div>
+          <div class="spec-num">03 / EPHEMERAL PURGE</div>
+          <div class="spec-statement">IDENTITIES VANISH WITH ABSOLUTE CERTAINTY AT YOUR COMMAND.</div>
+          <p class="spec-desc">
+            A single click purges local cache, session metadata, and downstream inbox pointers. Zero remnant telemetry, zero tracking cookies.
+          </p>
+        </div>
+        <div style="margin-top:var(--sp-21-6)">
+          <span style="font-family:var(--font-jetbrains);font-size:12px;color:var(--caldo)">HYGIENE: 100% EPHEMERAL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: ORDER / CTA BANNER
+       ========================================================================= -->
+  <section class="cta-section" id="cta">
+    <div class="cta-box">
+      <div class="hero-mono-kicker">03 / INSTANT ACCESS</div>
+      <h1>NEED A CLEAN INBOX FOR YOUR AUTHENTICATION FLOW?</h1>
+      <p class="hero-lead-text">
+        Generate a disposable mailbox right now or hook the Zeltcon Checker proxy into your automated test runner.
+      </p>
+
+      <div class="hero-btn-row">
+        <button class="hero-btn-cta" id="btn-cta-random">⚡ GENERATE INSTANT INBOX</button>
+        <button class="btn-lorenzo" id="btn-cta-inboxes">MANAGE STORED INBOXES</button>
+        <button class="btn-lorenzo" id="btn-cta-api">INSPECT API HEALTH</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================================
+     SECTION 5: FOOTER
+     ========================================================================= -->
+<footer class="page-footer">
+  <div class="footer-row">
+    <div class="footer-brand">ZELTCON CHECKER</div>
+    <div class="footer-social-cluster">
+      <button class="btn-lorenzo" id="btn-ft-random">NEW INBOX</button>
+      <button class="btn-lorenzo" id="btn-ft-inboxes">SAVED INBOXES</button>
+      <button class="btn-lorenzo" id="btn-ft-api">API PROXY</button>
+      <button class="btn-lorenzo" id="btn-ft-privacy">PRIVACY</button>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <div class="footer-copyright">
+      © 2026 ZELTCON CHECKER · EPHEMERAL DISPATCH & OTP ENGINE · ALL RIGHTS RESERVED
+    </div>
+    <div style="font-family:var(--font-jetbrains);font-size:12px;color:var(--caldo)">
+      MEASURED FROM LORENZOLOTTICI.IT VERBATIM
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================================
+     MODAL 1: MESSAGE READER OVERLAY (Tactile Italian Parchment Scheda)
+     ========================================================================= -->
+<div class="scheda-overlay" id="scheda-overlay">
+  <div class="scheda-box">
+    <div class="scheda-header">
+      <div>
+        <div class="scheda-title" id="scheda-subject">Subject</div>
+        <div class="scheda-meta">
+          <div>From: <span id="scheda-from" style="color:#14140f;font-weight:600"></span></div>
+          <div>To: <span id="scheda-to"></span></div>
+          <div>Date: <span id="scheda-date"></span></div>
+        </div>
+      </div>
+      <button class="scheda-close-btn" id="btn-scheda-close" title="Close (ESC)">×</button>
+    </div>
+
+    <!-- Modal Tactile Parchment OTP Callout -->
+    <div id="scheda-otp-container" style="display:none;padding:12px 24px 0 24px">
+      <div class="parchment-otp-badge" style="box-shadow:none;border-left:4px solid #14140f;background:rgba(20,20,15,0.06)">
+        <div class="parchment-otp-left">
+          <div class="parchment-otp-sub" style="color:rgba(20,20,15,0.7)">Authentication OTP Code</div>
+          <div class="parchment-otp-code" id="scheda-otp-code">------</div>
+        </div>
+        <button class="parchment-copy-btn" id="btn-scheda-copy-otp">Copy Code</button>
+      </div>
+    </div>
+
+    <!-- Reader View Mode Tabs -->
+    <div class="scheda-tabs-bar">
+      <div style="display:flex">
+        <button class="scheda-view-tab active" id="tab-view-text">Clean Text</button>
+        <button class="scheda-view-tab" id="tab-view-html">Rich HTML</button>
+      </div>
+      <div style="font-family:var(--font-jetbrains);font-size:11px;color:rgba(20,20,15,0.6)" id="scheda-size-label"></div>
+    </div>
+
+    <div class="scheda-body" id="scheda-body">
+      <pre id="scheda-text-content">Loading dispatch...</pre>
+      <iframe id="scheda-html-frame" sandbox="allow-popups" style="display:none"></iframe>
+
+      <!-- Attachments container -->
+      <div class="scheda-attachments" id="scheda-attachments-wrap" style="display:none">
+        <div style="font-family:var(--font-jetbrains);font-size:11px;font-weight:600;text-transform:uppercase;color:rgba(20,20,15,0.7)">
+          Attachments (<span id="scheda-att-count">0</span>)
+        </div>
+        <div id="scheda-att-list" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      </div>
+    </div>
+
+    <div class="scheda-footer">
+      <button class="btn-lorenzo" id="btn-scheda-copy-body" style="color:#14140f;font-size:12px">COPY BODY</button>
+      <button class="btn-lorenzo" id="btn-scheda-dismiss" style="color:#14140f;font-size:12px">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MODAL 2: SAVED INBOXES DRAWER / MODAL
+     ========================================================================= -->
+<div class="scheda-overlay" id="inboxes-modal">
+  <div class="scheda-box" style="background:#070707;color:#f0ede8;box-shadow:#f0ede852 0px 0px 0px 1px inset, 0 24px 64px rgba(0,0,0,0.95);border:none">
+    <div class="scheda-header" style="border-bottom:1px solid rgba(240,237,232,0.12)">
+      <div>
+        <div class="scheda-title" style="color:#f0ede8">SAVED INBOXES</div>
+        <div class="scheda-meta" style="color:var(--caldo)">SELECT OR PURGE ACTIVE MAILBOX IDENTITIES</div>
+      </div>
+      <button class="scheda-close-btn" id="btn-inboxes-close" style="color:#f0ede8">×</button>
+    </div>
+
+    <div class="scheda-body" style="color:#f0ede8;display:flex;flex-direction:column;gap:8px" id="inboxes-list-container">
+      <div style="text-align:center;padding:24px;font-family:var(--font-jetbrains);font-size:12px;color:rgba(240,237,232,0.5)">
+        Loading inboxes...
+      </div>
+    </div>
+
+    <div class="scheda-footer" style="background:rgba(240,237,232,0.03);border-top:1px solid rgba(240,237,232,0.1)">
+      <button class="btn-lorenzo" id="btn-inboxes-new-random" style="font-size:12px;color:var(--caldo)">+ CREATE NEW</button>
+      <button class="btn-lorenzo" id="btn-inboxes-clear-all" style="font-size:12px;color:var(--danger)">PURGE ALL</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MODAL 3: PRIVACY & API SPEC MODAL
+     ========================================================================= -->
+<div class="scheda-overlay" id="info-modal">
+  <div class="scheda-box" style="background:#070707;color:#f0ede8;box-shadow:#f0ede852 0px 0px 0px 1px inset, 0 24px 64px rgba(0,0,0,0.95)">
+    <div class="scheda-header" style="border-bottom:1px solid rgba(240,237,232,0.12)">
+      <div>
+        <div class="scheda-title" id="info-modal-title" style="color:#f0ede8">INFO</div>
+        <div class="scheda-meta" style="color:var(--caldo)">ZELTCON CHECKER ARCHITECTURE & POLICIES</div>
+      </div>
+      <button class="scheda-close-btn" id="btn-info-close" style="color:#f0ede8">×</button>
+    </div>
+
+    <div class="scheda-body" id="info-modal-body" style="color:#f0ede8;line-height:26px">
+      <!-- Injected dynamically -->
+    </div>
+
+    <div class="scheda-footer" style="background:rgba(240,237,232,0.03);border-top:1px solid rgba(240,237,232,0.1)">
+      <button class="btn-lorenzo" id="btn-info-dismiss" style="font-size:12px">DISMISS</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Feedback -->
+<div class="toast-box" id="toast-box"></div>
+
+<!-- Three.js (Local offline script with CDN fallback) -->
+<script src="three.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'"></script>
+
+<script>
+/**
+ * Zeltcon Checker - Single-Page Client Logic
+ * Designed with Lorenzo Lottici dark editorial aesthetic verbatim.
+ */
+
+const $ = (id) => document.getElementById(id);
+
+// ---- Magnetic Cursor ----
+function initCursor() {
+  const dot = $("cursor-dot");
+  const ring = $("cursor-ring");
+  let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + "px";
+    dot.style.top = mouseY + "px";
+  }, { passive: true });
+
+  function renderCursor() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    ring.style.left = ringX + "px";
+    ring.style.top = ringY + "px";
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest("button, a, input, select, .feature-card, .spec-card, .console-msg-row")) {
+      document.body.classList.add("hovering");
+    } else {
+      document.body.classList.remove("hovering");
+    }
+  });
+}
+
+// ---- Three.js 3D Kinetic Geometric Wireframe Cube ----
+function initThreeIcon() {
+  const container = $("3d-logo-canvas");
+  if (!window.THREE) {
+    container.textContent = "ZC";
+    return;
+  }
+
+  const width = 28, height = 28;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+  camera.position.z = 3.6;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  } catch (e) {
+    container.textContent = "ZC";
+    return;
+  }
+
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  container.innerHTML = "";
+  container.appendChild(renderer.domElement);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  // Wireframe Box
+  const boxGeo = new THREE.BoxGeometry(1.2, 1.2, 1.2);
+  const boxWire = new THREE.WireframeGeometry(boxGeo);
+  const boxLine = new THREE.LineSegments(
+    boxWire,
+    new THREE.LineBasicMaterial({ color: 0xf0ede8, transparent: true, opacity: 0.75 })
+  );
+  group.add(boxLine);
+
+  // Inner Terracotta Octahedron Node
+  const coreGeo = new THREE.OctahedronGeometry(0.5, 0);
+  const coreMat = new THREE.MeshStandardMaterial({ color: 0xd8b48c, metalness: 0.8, roughness: 0.25 });
+  group.add(new THREE.Mesh(coreGeo, coreMat));
+
+  const light = new THREE.PointLight(0xffffff, 1.6, 10);
+  light.position.set(2, 3, 4);
+  scene.add(light);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+  let targetX = 0, targetY = 0;
+  window.addEventListener("mousemove", (e) => {
+    const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+    targetY = ((e.clientX - cx) / cx) * 0.8;
+    targetX = ((e.clientY - cy) / cy) * 0.8;
+  }, { passive: true });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (document.hidden) return;
+    group.rotation.y += 0.012 + (targetY - group.rotation.y) * 0.05;
+    group.rotation.x += 0.008 + (targetX - group.rotation.x) * 0.05;
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
+// ---- Toast Notification ----
+function toast(msg) {
+  const box = $("toast-box");
+  box.textContent = msg;
+  box.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => box.classList.remove("show"), 2400);
+}
+
+// ---- Application State ----
+const appState = {
+  inbox: null,
+  folder: "inbox",
+  messages: [],
+  selectedId: null,
+  currentMsgData: null,
+  viewMode: "text", // 'text' | 'html'
+  inboxesList: [],
+  searchQuery: "",
+};
+
+// ---- API Helper ----
+async function api(path, opts = {}) {
+  const res = await fetch(path, opts);
+  const ct = res.headers.get("content-type") || "";
+  const data = ct.includes("json") ? await res.json() : await res.text();
+  if (!res.ok) throw new Error((data && data.error) || `HTTP ${res.status}`);
+  return data;
+}
+
+// ---- Domain Loader ----
+async function loadDomains() {
+  const sel = $("console-domain-select");
+  try {
+    const domains = await api("/api/domains");
+    sel.innerHTML = '<option value="">Random Domain</option>';
+    for (const d of domains) {
+      const opt = document.createElement("option");
+      opt.value = d.domain;
+      opt.textContent = `@${d.domain}`;
+      sel.appendChild(opt);
+    }
+  } catch (e) {
+    sel.innerHTML = '<option value="">(Default domain)</option>';
+  }
+}
+
+// ---- Inboxes Loader & Sync ----
+async function loadInboxes() {
+  try {
+    const list = await api("/api/inboxes");
+    appState.inboxesList = list || [];
+    $("nav-inbox-count").textContent = appState.inboxesList.length;
+
+    if (appState.inboxesList.length > 0) {
+      if (!appState.inbox || !appState.inboxesList.some(i => i.email === appState.inbox)) {
+        selectInbox(appState.inboxesList[0].email);
+      }
+    } else {
+      await createInbox(true);
+    }
+  } catch (e) {
+    toast(`Backend notice: ${e.message}`);
+  }
+}
+
+function selectInbox(email) {
+  appState.inbox = email;
+  $("console-address-label").textContent = email;
+  $("console-otp-card").style.display = "none";
+  loadMessages();
+}
+
+// Safe clipboard helper with fallback for non-HTTPS / local environments
+async function copyText(text) {
+  if (!text) return false;
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (err) {}
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch (err) {
+    return false;
+  }
+}
+
+// ---- Create Inbox ----
+async function createInbox(isRandom = false) {
+  const localInput = $("console-local-user");
+  const name = isRandom ? "" : localInput.value.trim();
+  const domain = isRandom ? "" : $("console-domain-select").value;
+
+  const buttons = document.querySelectorAll("#btn-console-create, #btn-console-random, #btn-hero-random, #btn-cta-random, #btn-ft-random, #btn-inboxes-new-random");
+  buttons.forEach(b => { if (b) b.disabled = true; });
+
+  try {
+    toast("Generating disposable inbox...");
+    const item = await api("/api/inboxes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, domain }),
+    });
+    localInput.value = "";
+    toast(`Created ${item.email}`);
+    await loadInboxes();
+    selectInbox(item.email);
+  } catch (e) {
+    toast(`Error: ${e.message}`);
+  } finally {
+    buttons.forEach(b => { if (b) b.disabled = false; });
+  }
+}
+
+// ---- Delete / Forget Current Mailbox ----
+async function forgetCurrentInbox() {
+  if (!appState.inbox) return;
+  const target = appState.inbox;
+  try {
+    await api(`/api/inboxes?inbox=${encodeURIComponent(target)}&email=${encodeURIComponent(target)}`, { method: "DELETE" });
+    toast(`Forgot ${target}`);
+    appState.inbox = null;
+    await loadInboxes();
+    if (!appState.inbox && appState.inboxesList.length > 0) {
+      selectInbox(appState.inboxesList[0].email);
+    } else if (!appState.inbox) {
+      await createInbox(true);
+    }
+  } catch (e) {
+    toast(`Delete error: ${e.message}`);
+  }
+}
+
+let pollCooldown = 0;
+
+// ---- Load Messages ----
+async function loadMessages() {
+  if (!appState.inbox) return;
+  if (Date.now() < pollCooldown) return;
+  const container = $("console-msg-container");
+
+  try {
+    const data = await api(`/api/messages?inbox=${encodeURIComponent(appState.inbox)}&folder=${appState.folder}`);
+    appState.messages = data.messages || [];
+    renderMessages(appState.messages);
+
+    const count = data.total !== undefined ? data.total : appState.messages.length;
+    if (appState.folder === "inbox") $("inbox-count-span").textContent = count;
+    else $("spam-count-span").textContent = count;
+
+    // Check if ANY message in the feed contains an extracted OTP code
+    let foundCode = null;
+    for (const m of appState.messages) {
+      if (m.code) {
+        foundCode = m.code;
+        break;
+      }
+    }
+    if (foundCode && appState.folder === "inbox") {
+      showConsoleOtp(foundCode);
+    } else {
+      $("console-otp-card").style.display = "none";
+    }
+  } catch (e) {
+    if (e.message && e.message.includes("limit of 30")) {
+      pollCooldown = Date.now() + 15000;
+      toast("API rate limit cooling down (15s)...");
+      return;
+    }
+    container.innerHTML = `<div style="font-size:12px;color:var(--danger);text-align:center;padding:16px">${escapeHtml(e.message)}</div>`;
+  }
+}
+
+function showConsoleOtp(code) {
+  $("console-otp-digits").textContent = code;
+  $("console-otp-card").style.display = "flex";
+  $("btn-copy-otp").onclick = async () => {
+    const ok = await copyText(code);
+    toast(ok ? `Copied OTP ${code}` : `OTP: ${code}`);
+  };
+}
+
+// ---- Render Message Rows ----
+function renderMessages(messages) {
+  const container = $("console-msg-container");
+  container.innerHTML = "";
+
+  const query = appState.searchQuery.toLowerCase().trim();
+  const filtered = query
+    ? messages.filter(m => (m.from || "").toLowerCase().includes(query) || (m.subject || "").toLowerCase().includes(query))
+    : messages;
+
+  if (!filtered.length) {
+    container.innerHTML = `<div style="font-size:12px;color:rgba(240,237,232,0.4);text-align:center;padding:24px 0">No dispatches in ${appState.folder}.</div>`;
+    return;
+  }
+
+  for (const m of filtered) {
+    const row = document.createElement("div");
+    row.className = `console-msg-row ${appState.selectedId === m.id ? "active" : ""}`;
+
+    const dateStr = m.date ? new Date(m.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+    const otpBadge = m.code ? `<span class="console-msg-otp-tag">OTP: ${escapeHtml(m.code)}</span>` : "";
+
+    row.innerHTML = `
+      <div class="console-msg-header">
+        <span class="console-msg-from">${escapeHtml(m.from || "(unknown)")}</span>
+        <span class="console-msg-time">${dateStr}</span>
+      </div>
+      <div class="console-msg-subj">${escapeHtml(m.subject || "(no subject)")}</div>
+      ${otpBadge}
+    `;
+    row.addEventListener("click", () => openMessageReader(m.id));
+    container.appendChild(row);
+  }
+}
+
+// ---- Open Message in Lorenzo Parchment Scheda Modal ----
+async function openMessageReader(id) {
+  appState.selectedId = id;
+  renderMessages(appState.messages);
+
+  $("scheda-overlay").classList.add("open");
+  $("scheda-subject").textContent = "Loading dispatch...";
+  $("scheda-from").textContent = "";
+  $("scheda-to").textContent = "";
+  $("scheda-date").textContent = "";
+  $("scheda-text-content").textContent = "Retrieving dispatch content from proxy...";
+  $("scheda-text-content").style.display = "block";
+  $("scheda-html-frame").style.display = "none";
+  $("scheda-otp-container").style.display = "none";
+  $("scheda-attachments-wrap").style.display = "none";
+
+  try {
+    const msg = await api(`/api/message?inbox=${encodeURIComponent(appState.inbox)}&id=${encodeURIComponent(id)}&folder=${appState.folder}`);
+    appState.currentMsgData = msg;
+
+    $("scheda-subject").textContent = msg.subject || "(no subject)";
+    $("scheda-from").textContent = msg.from || "(unknown)";
+    $("scheda-to").textContent = msg.to || appState.inbox;
+    $("scheda-date").textContent = msg.date ? new Date(msg.date).toLocaleString() : "";
+
+    // OTP Code Card
+    if (msg.code) {
+      $("scheda-otp-code").textContent = msg.code;
+      $("scheda-otp-container").style.display = "block";
+      $("btn-scheda-copy-otp").onclick = async () => {
+        const ok = await copyText(msg.code);
+        toast(ok ? `Copied OTP ${msg.code}` : `OTP: ${msg.code}`);
+      };
+      showConsoleOtp(msg.code);
+    } else {
+      $("scheda-otp-container").style.display = "none";
+    }
+
+    // Body content
+    const text = msg.text || msg.body_text || msg.body || "(Empty message content)";
+    $("scheda-text-content").textContent = text;
+
+    const htmlContent = msg.html || msg.body_html || "";
+    if (htmlContent) {
+      $("scheda-html-frame").srcdoc = htmlContent;
+      $("tab-view-html").style.display = "block";
+    } else {
+      $("tab-view-html").style.display = "none";
+      switchViewMode("text");
+    }
+
+    // Attachments
+    if (msg.attachments && msg.attachments.length > 0) {
+      $("scheda-attachments-wrap").style.display = "flex";
+      $("scheda-att-count").textContent = msg.attachments.length;
+      const list = $("scheda-att-list");
+      list.innerHTML = "";
+      msg.attachments.forEach((att, idx) => {
+        const attIdx = att.index !== undefined ? att.index : (att.attachment_index !== undefined ? att.attachment_index : idx);
+        const link = document.createElement("a");
+        link.className = "scheda-att-chip";
+        link.href = `/api/attachment?inbox=${encodeURIComponent(appState.inbox)}&id=${encodeURIComponent(id)}&index=${encodeURIComponent(attIdx)}&filename=${encodeURIComponent(att.filename || att.name || "attachment")}`;
+        link.target = "_blank";
+        link.download = att.filename || att.name || "attachment";
+        link.innerHTML = `📎 <span>${escapeHtml(att.filename || att.name || "File")}</span> <small style="opacity:0.6">(${formatBytes(att.size || 0)})</small>`;
+        list.appendChild(link);
+      });
+    } else {
+      $("scheda-attachments-wrap").style.display = "none";
+    }
+
+    $("scheda-size-label").textContent = `${formatBytes((msg.text || "").length)} text`;
+  } catch (e) {
+    $("scheda-text-content").textContent = `Error loading dispatch: ${e.message}`;
+  }
+}
+
+function switchViewMode(mode) {
+  appState.viewMode = mode;
+  if (mode === "text") {
+    $("tab-view-text").classList.add("active");
+    $("tab-view-html").classList.remove("active");
+    $("scheda-text-content").style.display = "block";
+    $("scheda-html-frame").style.display = "none";
+  } else {
+    $("tab-view-html").classList.add("active");
+    $("tab-view-text").classList.remove("active");
+    $("scheda-text-content").style.display = "none";
+    $("scheda-html-frame").style.display = "block";
+  }
+}
+
+function closeScheda() {
+  $("scheda-overlay").classList.remove("open");
+}
+
+// ---- Saved Inboxes Modal ----
+function openInboxesModal() {
+  const modal = $("inboxes-modal");
+  modal.classList.add("open");
+  renderInboxesModalList();
+}
+
+function renderInboxesModalList() {
+  const container = $("inboxes-list-container");
+  container.innerHTML = "";
+
+  if (!appState.inboxesList.length) {
+    container.innerHTML = '<div style="text-align:center;padding:24px;font-family:var(--font-jetbrains);font-size:12px;color:rgba(240,237,232,0.4)">No stored mailboxes found.</div>';
+    return;
+  }
+
+  for (const item of appState.inboxesList) {
+    const isCurrent = item.email === appState.inbox;
+    const div = document.createElement("div");
+    div.className = `inbox-list-item ${isCurrent ? "current" : ""}`;
+    div.innerHTML = `
+      <div style="min-width:0;display:flex;flex-direction:column;gap:2px">
+        <span style="font-family:var(--font-jetbrains);font-size:13px;color:#f0ede8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(item.email)}</span>
+        <span style="font-family:var(--font-jetbrains);font-size:10.5px;color:rgba(240,237,232,0.5)">Domain: @${escapeHtml(item.domain || "")}</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        ${isCurrent ? '<span style="font-family:var(--font-jetbrains);font-size:11px;color:var(--caldo);padding:4px 8px">ACTIVE</span>' : `<button class="btn-lorenzo" data-select="${escapeHtml(item.email)}" style="font-size:11px">SELECT</button>`}
+        <button class="btn-lorenzo" data-del="${escapeHtml(item.email)}" style="font-size:11px;color:var(--danger)">FORGET</button>
+      </div>
+    `;
+
+    const selBtn = div.querySelector("[data-select]");
+    if (selBtn) {
+      selBtn.addEventListener("click", () => {
+        selectInbox(item.email);
+        $("inboxes-modal").classList.remove("open");
+        toast(`Selected ${item.email}`);
+      });
+    }
+
+    const delBtn = div.querySelector("[data-del]");
+    if (delBtn) {
+      delBtn.addEventListener("click", async () => {
+        try {
+          await api(`/api/inboxes?inbox=${encodeURIComponent(item.email)}&email=${encodeURIComponent(item.email)}`, { method: "DELETE" });
+          toast(`Deleted ${item.email}`);
+          await loadInboxes();
+          renderInboxesModalList();
+        } catch (e) {
+          toast(`Error: ${e.message}`);
+        }
+      });
+    }
+
+    container.appendChild(div);
+  }
+}
+
+// ---- Info / Privacy Modal ----
+function openInfoModal(type) {
+  const modal = $("info-modal");
+  const title = $("info-modal-title");
+  const body = $("info-modal-body");
+
+  if (type === "privacy") {
+    title.textContent = "PRIVACY & DATA POLICY";
+    body.innerHTML = `
+      <p style="margin-bottom:14px"><strong>Zero-Knowledge Architecture</strong></p>
+      <p style="margin-bottom:14px;color:rgba(240,237,232,0.8)">
+        Zeltcon Checker operates with zero persistent tracking. Inboxes, message bodies, and telemetry reside exclusively in ephemeral memory cache layers. No tracking pixels, analytics scripts, or behavioral cookies are embedded.
+      </p>
+      <p style="margin-bottom:14px"><strong>Client-Side Storage</strong></p>
+      <p style="color:rgba(240,237,232,0.8)">
+        Mailbox identifiers are stored locally in your active browser session so you can recover your disposable addresses. You can purge all local records anytime via the "Clear Stored Data" action.
+      </p>
+    `;
+  } else if (type === "api") {
+    title.textContent = "REST PROXY API SPECIFICATION";
+    body.innerHTML = `
+      <p style="margin-bottom:12px"><strong>Available Proxy Endpoints:</strong></p>
+      <pre style="background:#000;padding:12px;font-family:var(--font-jetbrains);font-size:12px;line-height:20px;border:1px solid rgba(240,237,232,0.1);color:var(--caldo)">
+GET  /api/health            - System & upstream status
+GET  /api/domains           - List active routing domains
+GET  /api/inboxes           - List stored mailboxes
+POST /api/inboxes           - Create new inbox {name, domain}
+DEL  /api/inboxes?email=...  - Delete mailbox
+GET  /api/messages?inbox=.. - Stream dispatches (folder=inbox|spam)
+GET  /api/message?id=...    - Fetch full message with parsed OTP
+GET  /api/attachment?id=... - Download raw attachments</pre>
+      <p style="margin-top:14px;font-size:13px;color:rgba(240,237,232,0.7)">
+        Engineered for seamless drop-in integration with Node.js, Python, curl, and automated end-to-end test runners.
+      </p>
+    `;
+  } else if (type === "cookies") {
+    title.textContent = "COOKIE POLICY";
+    body.innerHTML = `
+      <p style="margin-bottom:14px;color:rgba(240,237,232,0.8)">
+        Zeltcon Checker sets zero tracking or marketing cookies. Any local persistence is strictly functional (local cache of disposable mailbox handles) to maintain state during active testing sessions.
+      </p>
+    `;
+  }
+
+  modal.classList.add("open");
+}
+
+// ---- Helpers ----
+function escapeHtml(s) {
+  return String(s || "").replace(/[&<>"']/g, (m) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" })[m]);
+}
+
+function formatBytes(bytes) {
+  if (!bytes) return "0 B";
+  const k = 1024, dm = 1;
+  const sizes = ["B", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+}
+
+// ---- Event Listeners Wire-up ----
+
+// Console Actions
+$("btn-console-create").addEventListener("click", () => createInbox(false));
+$("btn-console-random").addEventListener("click", () => createInbox(true));
+$("btn-hero-random").addEventListener("click", () => createInbox(true));
+$("btn-cta-random").addEventListener("click", () => {
+  createInbox(true);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+$("btn-ft-random").addEventListener("click", () => {
+  createInbox(true);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+$("btn-console-refresh").addEventListener("click", loadMessages);
+$("btn-console-clear").addEventListener("click", forgetCurrentInbox);
+
+// Enter key on custom username input
+$("console-local-user").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    createInbox(false);
+  }
+});
+
+// Copy Address
+$("btn-console-copy").addEventListener("click", async () => {
+  if (appState.inbox) {
+    const ok = await copyText(appState.inbox);
+    toast(ok ? `Copied ${appState.inbox}` : `${appState.inbox}`);
+  }
+});
+
+// Switch / Manage Inboxes
+$("btn-console-switch").addEventListener("click", openInboxesModal);
+$("btn-nav-inboxes").addEventListener("click", openInboxesModal);
+$("btn-hero-manage").addEventListener("click", openInboxesModal);
+$("btn-cta-inboxes").addEventListener("click", openInboxesModal);
+$("btn-ft-inboxes").addEventListener("click", openInboxesModal);
+$("btn-inboxes-close").addEventListener("click", () => $("inboxes-modal").classList.remove("open"));
+
+$("btn-inboxes-new-random").addEventListener("click", async () => {
+  await createInbox(true);
+  renderInboxesModalList();
+});
+
+$("btn-inboxes-clear-all").addEventListener("click", async () => {
+  if (!confirm("Are you sure you want to purge all stored inboxes?")) return;
+  for (const item of appState.inboxesList) {
+    try {
+      await api(`/api/inboxes?inbox=${encodeURIComponent(item.email)}&email=${encodeURIComponent(item.email)}`, { method: "DELETE" });
+    } catch (e) {}
+  }
+  toast("Purged all stored mailboxes");
+  await loadInboxes();
+  renderInboxesModalList();
+});
+
+// Clear Data from bottom bar
+$("btn-bottom-clear").addEventListener("click", async () => {
+  if (!confirm("Clear all locally stored disposable identities?")) return;
+  for (const item of appState.inboxesList) {
+    try {
+      await api(`/api/inboxes?inbox=${encodeURIComponent(item.email)}&email=${encodeURIComponent(item.email)}`, { method: "DELETE" });
+    } catch (e) {}
+  }
+  toast("Cleared all local cache");
+  await loadInboxes();
+});
+
+// Folder Tabs
+$("tab-console-inbox").addEventListener("click", () => {
+  appState.folder = "inbox";
+  $("tab-console-inbox").classList.add("active");
+  $("tab-console-spam").classList.remove("active");
+  loadMessages();
+});
+$("tab-console-spam").addEventListener("click", () => {
+  appState.folder = "spam";
+  $("tab-console-spam").classList.add("active");
+  $("tab-console-inbox").classList.remove("active");
+  loadMessages();
+});
+
+// Search / Filter
+$("console-search-box").addEventListener("input", (e) => {
+  appState.searchQuery = e.target.value;
+  renderMessages(appState.messages);
+});
+
+// Scheda Modal (Message Reader) Controls
+$("btn-scheda-close").addEventListener("click", closeScheda);
+$("btn-scheda-dismiss").addEventListener("click", closeScheda);
+$("tab-view-text").addEventListener("click", () => switchViewMode("text"));
+$("tab-view-html").addEventListener("click", () => switchViewMode("html"));
+$("btn-scheda-copy-body").addEventListener("click", async () => {
+  if (appState.currentMsgData) {
+    const body = appState.currentMsgData.text || appState.currentMsgData.body || "";
+    const ok = await copyText(body);
+    toast(ok ? "Copied message body" : "Message body copied");
+  }
+});
+
+// Info & Privacy Modals
+$("btn-hero-privacy").addEventListener("click", () => openInfoModal("privacy"));
+$("btn-bottom-privacy").addEventListener("click", () => openInfoModal("privacy"));
+$("btn-ft-privacy").addEventListener("click", () => openInfoModal("privacy"));
+$("btn-card-privacy-info").addEventListener("click", () => openInfoModal("privacy"));
+
+$("btn-bottom-cookies").addEventListener("click", () => openInfoModal("cookies"));
+
+$("btn-nav-docs").addEventListener("click", () => openInfoModal("api"));
+$("btn-card-api-info").addEventListener("click", () => openInfoModal("api"));
+$("btn-ft-api").addEventListener("click", () => openInfoModal("api"));
+$("btn-cta-api").addEventListener("click", async () => {
+  try {
+    const health = await api("/api/health");
+    toast(`Health: ${health.brand || "Zeltcon Checker"} (Proxy: ${health.live ? "OK" : "DOWN"})`);
+  } catch (e) {
+    toast(`Health check failed: ${e.message}`);
+  }
+});
+
+$("btn-card-otp-info").addEventListener("click", () => {
+  toast("OTP Parser supports 4-8 digit numeric, hyphenated, and Google G-codes.");
+});
+$("btn-card-domain-info").addEventListener("click", () => {
+  $("console-domain-select").focus();
+  toast("Select domains from the console dropdown");
+});
+
+$("btn-info-close").addEventListener("click", () => $("info-modal").classList.remove("open"));
+$("btn-info-dismiss").addEventListener("click", () => $("info-modal").classList.remove("open"));
+
+// Close modals on Escape key or backdrop click
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    $("scheda-overlay").classList.remove("open");
+    $("inboxes-modal").classList.remove("open");
+    $("info-modal").classList.remove("open");
+  }
+});
+for (const overlay of document.querySelectorAll(".scheda-overlay")) {
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("open");
+    }
+  });
+}
+
+// Background Auto-Refresh Poller (10s non-overlapping, pauses when tab is hidden)
+let pollTimer = null;
+async function schedulePoll() {
+  clearTimeout(pollTimer);
+  if (appState.inbox && !document.hidden && Date.now() >= pollCooldown) {
+    try {
+      await loadMessages();
+    } catch {}
+  }
+  const nextDelay = Date.now() < pollCooldown ? Math.max(5000, pollCooldown - Date.now()) : 10000;
+  pollTimer = setTimeout(schedulePoll, nextDelay);
+}
+
+// Automatically resume and refresh when user switches back to this tab
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && appState.inbox) {
+    schedulePoll();
+  }
+});
+
+// Initialize Page
+(async function init() {
+  initCursor();
+  initThreeIcon();
+  await loadDomains();
+  await loadInboxes();
+  schedulePoll();
+})();
+</script>
+</body>
+</html>

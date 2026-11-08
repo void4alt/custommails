@@ -1,0 +1,2017 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZELTON MAIL — Disposable Email & Instant OTP Verification</title>
+<meta name="description" content="Zelton Mail. Disposable temporary inboxes and instant OTP code resolution over an interactive night valley.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --u: min(calc(100vw / 1600), calc(100vh / 900));
+  --cream: #f5efe2;
+  --dark: #070707;
+  --dark-glass: rgba(8, 8, 8, 0.62);
+  --border-cream: rgba(245, 239, 226, 0.16);
+  --border-glow: rgba(245, 239, 226, 0.35);
+  --parchment: #eae5da;
+  --parchment-ink: #151510;
+  --caldo: #d8b48c;
+  --caldo-dim: rgba(216, 180, 140, 0.2);
+  --danger: #ef4444;
+  --success: #4cc38a;
+  --font-antonio: Antonio, "Arial Narrow", sans-serif;
+  --font-manrope: Manrope, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: #000;
+  color: var(--cream);
+  font-family: var(--font-manrope);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ---- Fixed 3D Flower Valley Canvas ---- */
+#valley {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: auto;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+.js-canvas-container { position: absolute; inset: 0; }
+.js-canvas-container canvas { display: block; width: 100%!important; height: 100%!important; }
+.lil-gui { display: none!important; }
+
+/* ---- Loader ---- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: #000;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+.loader.gone { opacity: 0; pointer-events: none; }
+.loader span {
+  width: calc(9 * var(--u));
+  height: calc(9 * var(--u));
+  min-width: 6px;
+  min-height: 6px;
+  border-radius: 50%;
+  background: var(--cream);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse { 50% { transform: scale(0.4); opacity: 0.4; } }
+
+/* ---- Foreground UI Layer ---- */
+.ui-layer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+  pointer-events: none;
+}
+.ui-layer.on { opacity: 1; }
+.hero-screen { pointer-events: none; }
+.hero-screen a, .hero-screen button { pointer-events: auto; }
+.console-section, .console-card, .console-card * { pointer-events: auto; }
+.scheda-overlay, .scheda-overlay * { pointer-events: auto; }
+.corner-dock, .corner-dock * { pointer-events: auto; }
+
+/* ---- Hero Viewport Section (Screen 1) ---- */
+.hero-screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero-title {
+  font-family: var(--font-antonio);
+  font-weight: 400;
+  font-size: calc(158 * var(--u));
+  line-height: 0.92;
+  letter-spacing: -0.012em;
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.hero-sub {
+  margin-top: calc(32 * var(--u));
+  font-size: calc(18 * var(--u));
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(245, 239, 226, 0.7);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-manrope);
+}
+
+/* ---- LET'S GO Button ---- */
+.btn-lets-go {
+  margin-top: calc(44 * var(--u));
+  display: inline-flex;
+  align-items: center;
+  gap: calc(14 * var(--u));
+  height: calc(56 * var(--u));
+  padding: 0 calc(36 * var(--u));
+  border-radius: 99px;
+  border: 1.5px solid var(--cream);
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--font-manrope);
+  font-size: calc(15 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+}
+.btn-lets-go:hover {
+  background: var(--cream);
+  color: #151510;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(245, 239, 226, 0.25);
+}
+.btn-lets-go svg {
+  width: calc(20 * var(--u));
+  height: calc(20 * var(--u));
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+.btn-lets-go:hover svg {
+  transform: translateX(4px);
+}
+
+/* ---- Bottom Right Controls (Scroll & Sound) ---- */
+.corner-dock {
+  position: fixed;
+  right: calc(44 * var(--u));
+  bottom: calc(44 * var(--u));
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: calc(18 * var(--u));
+  font-size: calc(12.5 * var(--u));
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: auto;
+  user-select: none;
+}
+.corner-dock span {
+  color: rgba(245, 239, 226, 0.7);
+  font-family: var(--font-manrope);
+}
+.corner-dock i {
+  width: 1px;
+  height: calc(26 * var(--u));
+  background: rgba(245, 239, 226, 0.45);
+}
+.sound-btn {
+  display: grid;
+  place-items: center;
+  width: calc(28 * var(--u));
+  height: calc(28 * var(--u));
+  cursor: pointer;
+}
+.sound-btn svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sound-btn .w { transition: opacity 0.3s; }
+.sound-btn[aria-pressed=false] .w { opacity: 0; }
+.sound-btn[aria-pressed=true] .x { opacity: 0; }
+
+/* ---- Temp Mail Live Dispatch Console Section ---- */
+.console-section {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 120px;
+  padding: 0 24px;
+}
+
+.console-card {
+  background: rgba(12, 12, 10, 0.78);
+  border: 1px solid var(--border-cream);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.85), inset 0 0 0 1px rgba(245, 239, 226, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Console Header Bar */
+.console-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  background: rgba(255, 255, 255, 0.02);
+}
+.console-brand-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-antonio);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  text-transform: uppercase;
+}
+.console-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--success);
+  text-transform: uppercase;
+}
+.console-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+@keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.console-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-action-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  padding: 8px 14px;
+  border: 1px solid var(--border-cream);
+  border-radius: 99px;
+  transition: all 0.2s ease;
+}
+.btn-action-text:hover {
+  background: rgba(245, 239, 226, 0.12);
+  border-color: var(--cream);
+}
+.btn-action-text.danger {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.btn-action-text.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--danger);
+}
+
+/* Active Mailbox Banner */
+.console-address-banner {
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(245, 239, 226, 0.03) 0%, rgba(0, 0, 0, 0.2) 100%);
+  border-bottom: 1px solid var(--border-cream);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.address-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.address-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--caldo);
+}
+.address-val {
+  font-family: var(--font-antonio);
+  font-size: clamp(24px, 3.2vw, 38px);
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.address-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn-copy-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 99px;
+  background: var(--cream);
+  color: #151510;
+  font-family: var(--font-manrope);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.btn-copy-address:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(245, 239, 226, 0.3);
+}
+.btn-random-fresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 99px;
+  border: 1px solid var(--border-cream);
+  color: var(--cream);
+  font-family: var(--font-manrope);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.btn-random-fresh:hover {
+  border-color: var(--cream);
+  background: rgba(245, 239, 226, 0.08);
+}
+
+/* Custom Mailbox Creation Row */
+.console-create-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  background: rgba(0, 0, 0, 0.25);
+  flex-wrap: wrap;
+}
+.create-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 240px;
+}
+.custom-input {
+  flex: 1;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-cream);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.custom-input:focus { border-color: var(--cream); }
+.custom-select {
+  height: 40px;
+  background: #111;
+  border: 1px solid var(--border-cream);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  outline: none;
+  cursor: pointer;
+}
+.btn-create-submit {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-cream);
+  background: rgba(245, 239, 226, 0.1);
+  color: var(--cream);
+  font-family: var(--font-manrope);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.btn-create-submit:hover {
+  background: var(--cream);
+  color: #151510;
+}
+
+/* ---- Tactile Parchment OTP Hero Card ---- */
+.console-otp-card {
+  margin: 20px 28px;
+  background: var(--parchment);
+  color: var(--parchment-ink);
+  border-radius: 14px;
+  padding: 22px 28px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  animation: revealUp 0.35s ease;
+}
+.otp-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.otp-card-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.otp-code-display {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #0c0c09;
+}
+.btn-copy-otp {
+  height: 46px;
+  padding: 0 26px;
+  border-radius: 99px;
+  background: #151510;
+  color: #f5efe2;
+  font-family: var(--font-manrope);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.btn-copy-otp:hover {
+  transform: translateY(-1px);
+  background: #000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* ---- Message Feed Controls ---- */
+.feed-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  background: rgba(0, 0, 0, 0.15);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.feed-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.feed-tab {
+  font-family: var(--font-antonio);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: rgba(245, 239, 226, 0.5);
+  transition: all 0.2s;
+}
+.feed-tab.active {
+  color: var(--cream);
+  background: rgba(245, 239, 226, 0.1);
+}
+.feed-search-input {
+  height: 34px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-cream);
+  border-radius: 6px;
+  padding: 0 12px;
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  outline: none;
+  width: 200px;
+  transition: width 0.2s, border-color 0.2s;
+}
+.feed-search-input:focus {
+  width: 260px;
+  border-color: var(--cream);
+}
+.btn-refresh {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--caldo);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-refresh:hover { color: var(--cream); }
+
+/* ---- Message List ---- */
+.messages-list-wrap {
+  min-height: 220px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+.msg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(245, 239, 226, 0.06);
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+  gap: 16px;
+}
+.msg-row:hover {
+  background: rgba(245, 239, 226, 0.08);
+  transform: translateX(2px);
+}
+.msg-row.active {
+  background: rgba(245, 239, 226, 0.12);
+  border-left: 3px solid var(--caldo);
+}
+.msg-row-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.msg-row-from {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--caldo);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.msg-row-subj {
+  font-family: var(--font-manrope);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.msg-row-side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.msg-otp-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: var(--parchment);
+  color: var(--parchment-ink);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.msg-row-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(245, 239, 226, 0.45);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 64px 20px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: rgba(245, 239, 226, 0.4);
+}
+
+/* ---- Integrated Email Reader Panel (Inside Console Card) ---- */
+.email-reader-panel {
+  display: none;
+  flex-direction: column;
+  animation: revealUp 0.25s ease;
+}
+.email-reader-panel.open {
+  display: flex;
+}
+
+.reader-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  background: rgba(0, 0, 0, 0.25);
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.reader-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-back-inbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--caldo);
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--border-cream);
+  background: rgba(245, 239, 226, 0.06);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-back-inbox:hover {
+  background: var(--cream);
+  color: #151510;
+  border-color: var(--cream);
+}
+.reader-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.reader-mode-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid var(--border-cream);
+}
+.reader-mode-tab {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 226, 0.5);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.reader-mode-tab.active {
+  color: var(--cream);
+  background: rgba(245, 239, 226, 0.14);
+}
+.reader-header-box {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.015);
+}
+.reader-subject-title {
+  font-family: var(--font-antonio);
+  font-size: clamp(22px, 2.5vw, 32px);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+.reader-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: rgba(245, 239, 226, 0.6);
+}
+.reader-meta-bar strong {
+  color: var(--cream);
+  font-weight: 500;
+}
+.reader-otp-callout {
+  margin: 18px 28px 0;
+  background: var(--parchment);
+  color: var(--parchment-ink);
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.reader-otp-digits {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.reader-body-container {
+  padding: 24px 28px;
+  min-height: 380px;
+  overflow-y: auto;
+}
+.reader-plain-text {
+  font-family: var(--font-manrope);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(245, 239, 226, 0.9);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.reader-html-frame {
+  width: 100%;
+  min-height: 520px;
+  border: 0;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.reader-att-box {
+  padding: 14px 28px;
+  border-top: 1px solid var(--border-cream);
+  display: none;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* ---- Scheda Modal (Dispatch Reader) ---- */
+.scheda-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(0, 0, 0, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.scheda-overlay.open { display: flex; animation: revealUp 0.3s ease; }
+
+.scheda-dialog {
+  background: #0d0d0c;
+  border: 1px solid var(--border-glow);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
+}
+.scheda-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.scheda-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.scheda-subject {
+  font-family: var(--font-antonio);
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+.scheda-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-cream);
+  display: grid;
+  place-items: center;
+  color: var(--cream);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.scheda-close-btn:hover { background: var(--cream); color: #000; }
+
+.scheda-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: rgba(245, 239, 226, 0.6);
+  flex-wrap: wrap;
+}
+.scheda-meta-row strong { color: var(--cream); font-weight: 500; }
+
+/* Scheda OTP Banner */
+.scheda-otp-banner {
+  margin: 16px 28px 0;
+  background: var(--parchment);
+  color: var(--parchment-ink);
+  padding: 16px 24px;
+  border-radius: 10px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+.scheda-otp-digits {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+/* Scheda Tabs & Content */
+.scheda-view-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--border-cream);
+  background: rgba(0, 0, 0, 0.3);
+}
+.scheda-view-tab {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 226, 0.5);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.scheda-view-tab.active {
+  color: var(--cream);
+  background: rgba(245, 239, 226, 0.12);
+}
+
+.scheda-body-scroll {
+  padding: 24px 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+.scheda-body-text {
+  font-family: var(--font-manrope);
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(245, 239, 226, 0.9);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.scheda-html-frame {
+  width: 100%;
+  min-height: 400px;
+  border: 0;
+  background: #fff;
+  border-radius: 8px;
+  display: none;
+}
+
+/* Attachments */
+.scheda-attachments-wrap {
+  padding: 14px 28px;
+  border-top: 1px solid var(--border-cream);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.2);
+}
+.scheda-att-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-cream);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cream);
+  transition: all 0.2s;
+}
+.scheda-att-chip:hover {
+  background: rgba(245, 239, 226, 0.1);
+  border-color: var(--cream);
+}
+
+/* ---- Saved Inboxes Modal ---- */
+.inboxes-dialog {
+  background: #0d0d0c;
+  border: 1px solid var(--border-glow);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
+}
+.inboxes-dialog-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-cream);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.inboxes-dialog-header h3 {
+  font-family: var(--font-antonio);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+}
+.inboxes-list-body {
+  padding: 16px 24px;
+  overflow-y: auto;
+  max-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.inbox-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-cream);
+  border-radius: 10px;
+  gap: 12px;
+}
+.inbox-list-row.current {
+  border-color: var(--caldo);
+  background: rgba(216, 180, 140, 0.05);
+}
+
+/* Toast */
+.toast-msg {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: var(--cream);
+  color: #151510;
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+  z-index: 99999;
+}
+.toast-msg.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 820px) {
+  :root { --u: 1px; }
+  .hero-title { font-size: clamp(48px, 16vw, 84px); }
+  .hero-sub { font-size: 15px; }
+  .btn-lets-go { height: 48px; padding: 0 24px; font-size: 13px; }
+  .corner-dock { right: 20px; bottom: 24px; font-size: 11px; }
+  .console-header-bar { padding: 16px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .console-address-banner { padding: 20px; }
+  .console-create-row { padding: 14px 20px; }
+  .console-otp-card { margin: 16px 20px; flex-direction: column; gap: 14px; text-align: center; }
+  .feed-toolbar { padding: 14px 20px; }
+  .feed-search-input { width: 100%; }
+  .feed-search-input:focus { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader span { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 3D Night Flower Valley Canvas -->
+<div id="valley" aria-hidden="true"><div class="js-canvas-container"></div></div>
+
+<!-- Foreground Interface Layer -->
+<div class="ui-layer" id="ui">
+
+  <!-- =========================================================================
+       HERO VIEW (Screen 1): Minimalist, pure, centered "ZELTON MAIL"
+       ========================================================================= -->
+  <section class="hero-screen">
+    <h1 class="hero-title">ZELTON MAIL</h1>
+    <p class="hero-sub">Disposable inboxes · Instant OTP resolution</p>
+    <button class="btn-lets-go" id="btn-hero-go" aria-label="Enter Zelton Mail Dispatch Console">
+      <span>LET'S GO</span>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </section>
+
+  <!-- =========================================================================
+       TEMPORARY MAIL & OTP DISPATCH CONSOLE (Screen 2)
+       ========================================================================= -->
+  <section class="console-section" id="console-section">
+    <div class="console-card">
+
+      <!-- Console Header Bar -->
+      <div class="console-header-bar">
+        <div class="console-brand-tag">
+          <span>ZELTON MAIL</span>
+          <span style="opacity:0.3">/</span>
+          <span style="font-size:14px;font-family:var(--font-mono);letter-spacing:0.08em;color:var(--caldo)">DISPATCH CONSOLE</span>
+        </div>
+        <div class="console-status-badge">
+          <span class="console-status-dot"></span>
+          <span id="console-status-tag">AUTO-SYNC ACTIVE</span>
+        </div>
+        <div class="console-header-actions">
+          <button class="btn-action-text" id="btn-saved-inboxes">SAVED (<span id="nav-inbox-count">0</span>)</button>
+          <button class="btn-action-text danger" id="btn-forget-mailbox">FORGET</button>
+        </div>
+      </div>
+
+      <!-- Active Address Banner -->
+      <div class="console-address-banner">
+        <div class="address-info">
+          <span class="address-kicker">Active Disposable Mailbox</span>
+          <span class="address-val" id="console-address-label">Generating mailbox...</span>
+        </div>
+        <div class="address-controls">
+          <button class="btn-copy-address" id="btn-copy-address" title="Copy mailbox address to clipboard">
+            📋 <span>COPY ADDRESS</span>
+          </button>
+          <button class="btn-random-fresh" id="btn-random-fresh" title="Generate another instant mailbox">
+            ⚡ <span>RANDOM NEW</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Custom Mailbox Creator Row -->
+      <div class="console-create-row">
+        <div class="create-input-group">
+          <input type="text" class="custom-input" id="console-local-user" placeholder="custom.alias (or leave blank)" autocomplete="off">
+          <select class="custom-select" id="console-domain-select">
+            <option value="">Random Domain</option>
+          </select>
+        </div>
+        <button class="btn-create-submit" id="btn-console-create">CREATE MAILBOX</button>
+      </div>
+
+      <!-- Tactile Parchment OTP Hero Card (Populates automatically when OTP detected) -->
+      <div class="console-otp-card" id="console-otp-card">
+        <div class="otp-label-group">
+          <span class="otp-card-kicker">VERIFICATION CODE DETECTED</span>
+          <span class="otp-code-display" id="console-otp-digits">------</span>
+        </div>
+        <button class="btn-copy-otp" id="btn-copy-otp">COPY OTP CODE</button>
+      </div>
+
+      <!-- Live Feed View (List of emails) -->
+      <div id="feed-view-panel">
+        <div class="feed-toolbar">
+          <div class="feed-tabs">
+            <button class="feed-tab active" id="tab-inbox">INBOX (<span id="inbox-count-span">0</span>)</button>
+            <button class="feed-tab" id="tab-spam">SPAM (<span id="spam-count-span">0</span>)</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <input type="text" class="feed-search-input" id="console-search-box" placeholder="Search dispatches...">
+            <button class="btn-refresh" id="btn-refresh-feed">↻ REFRESH</button>
+          </div>
+        </div>
+
+        <!-- Message Rows List -->
+        <div class="messages-list-wrap" id="console-msg-container">
+          <div class="empty-state">Awaiting dispatches for active mailbox...</div>
+        </div>
+      </div>
+
+      <!-- Integrated Email Reader View (Shown when an email is opened) -->
+      <div class="email-reader-panel" id="email-reader-panel">
+        <div class="reader-toolbar">
+          <div class="reader-toolbar-left">
+            <button class="btn-back-inbox" id="btn-back-to-inbox" title="Return to inbox list">
+              ← <span>BACK TO INBOX</span>
+            </button>
+          </div>
+          <div class="reader-toolbar-right">
+            <div class="reader-mode-tabs">
+              <button class="reader-mode-tab active" id="panel-tab-html">RICH HTML</button>
+              <button class="reader-mode-tab" id="panel-tab-text">CLEAN TEXT</button>
+            </div>
+            <button class="btn-action-text" id="btn-panel-copy-body">COPY BODY</button>
+            <button class="btn-action-text" id="btn-panel-expand" title="Open in fullscreen dialog">EXPAND ↗</button>
+          </div>
+        </div>
+
+        <div class="reader-header-box">
+          <h2 class="reader-subject-title" id="panel-subject">Loading email...</h2>
+          <div class="reader-meta-bar">
+            <span>From: <strong id="panel-from">—</strong></span>
+            <span>To: <strong id="panel-to">—</strong></span>
+            <span>Date: <strong id="panel-date">—</strong></span>
+          </div>
+        </div>
+
+        <!-- OTP Callout Inside Reader -->
+        <div class="reader-otp-callout" id="panel-otp-box">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7">VERIFICATION CODE</div>
+            <div class="reader-otp-digits" id="panel-otp-code">------</div>
+          </div>
+          <button class="btn-copy-otp" id="btn-panel-copy-otp">COPY CODE</button>
+        </div>
+
+        <!-- Email Body Container -->
+        <div class="reader-body-container">
+          <div class="reader-plain-text" id="panel-text-content" style="display:none"></div>
+          <iframe class="reader-html-frame" id="panel-html-frame" sandbox="allow-same-origin allow-popups"></iframe>
+        </div>
+
+        <!-- Attachments -->
+        <div class="reader-att-box" id="panel-att-wrap">
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--caldo)">ATTACHMENTS (<span id="panel-att-count">0</span>):</span>
+          <div id="panel-att-list" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- Bottom Right Corner Dock: Scroll to wander + Ambient Sound Toggle -->
+<div class="corner-dock">
+  <span>Scroll to wander</span>
+  <i></i>
+  <button class="sound-btn" id="sound" aria-pressed="false" aria-label="Ambient sound">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 9.5v5h3.5L12 18V6L7.5 9.5Z"/>
+      <path class="w" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>
+      <path class="x" d="m16 10 4 4m0-4-4 4"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Scheda Message Reader Modal -->
+<div class="scheda-overlay" id="scheda-overlay">
+  <div class="scheda-dialog">
+    <div class="scheda-header">
+      <div class="scheda-header-top">
+        <h2 class="scheda-subject" id="scheda-subject">Loading dispatch...</h2>
+        <button class="scheda-close-btn" id="btn-scheda-close" aria-label="Close">✕</button>
+      </div>
+      <div class="scheda-meta-row">
+        <span>From: <strong id="scheda-from">—</strong></span>
+        <span>To: <strong id="scheda-to">—</strong></span>
+        <span>Date: <strong id="scheda-date">—</strong></span>
+      </div>
+    </div>
+
+    <!-- OTP Banner Inside Reader -->
+    <div class="scheda-otp-banner" id="scheda-otp-container">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">VERIFICATION CODE</div>
+        <div class="scheda-otp-digits" id="scheda-otp-code">------</div>
+      </div>
+      <button class="btn-copy-address" id="btn-scheda-copy-otp">COPY CODE</button>
+    </div>
+
+    <!-- View Mode Tabs -->
+    <div class="scheda-view-tabs">
+      <button class="scheda-view-tab active" id="tab-view-text">CLEAN TEXT</button>
+      <button class="scheda-view-tab" id="tab-view-html">RICH HTML</button>
+      <button class="scheda-view-tab" id="btn-scheda-copy-body" style="margin-left:auto">COPY BODY</button>
+    </div>
+
+    <!-- Body Scroll Area -->
+    <div class="scheda-body-scroll">
+      <div class="scheda-body-text" id="scheda-text-content">Retrieving message...</div>
+      <iframe class="scheda-html-frame" id="scheda-html-frame" sandbox="allow-popups"></iframe>
+    </div>
+
+    <!-- Attachments -->
+    <div class="scheda-attachments-wrap" id="scheda-attachments-wrap" style="display:none">
+      <span style="font-family:var(--font-mono);font-size:11px;color:var(--caldo)">ATTACHMENTS (<span id="scheda-att-count">0</span>):</span>
+      <div id="scheda-att-list" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Saved Inboxes Modal Drawer -->
+<div class="scheda-overlay" id="inboxes-modal">
+  <div class="inboxes-dialog">
+    <div class="inboxes-dialog-header">
+      <h3>SAVED DISPOSABLE INBOXES</h3>
+      <button class="scheda-close-btn" id="btn-inboxes-close">✕</button>
+    </div>
+    <div class="inboxes-list-body" id="inboxes-list-container">
+      <!-- Injected dynamically -->
+    </div>
+    <div style="padding:16px 24px;border-top:1px solid var(--border-cream);display:flex;justify-content:space-between">
+      <button class="btn-create-submit" id="btn-inboxes-new-random">⚡ CREATE RANDOM</button>
+      <button class="btn-action-text danger" id="btn-inboxes-clear-all">PURGE ALL</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-msg" id="toast">Notice</div>
+
+<!-- Valley Loader Dot -->
+<div class="loader" id="loader"><span></span></div>
+
+<!-- =========================================================================
+     3D FLOWER VALLEY COMPILED WEBPACK CHUNKS (Original Gladeye Engine)
+     ========================================================================= -->
+<script src="_next/static/chunks/webpack-a76c04a7ba9aa4ef.js"></script>
+<script src="_next/static/chunks/fd9d1056-76aadce26f555392.js"></script>
+<script src="_next/static/chunks/123-3b7f3df3cc5866d7.js"></script>
+<script src="_next/static/chunks/450-96e2a31dde902aa5.js"></script>
+<script src="_next/static/chunks/567-6466d5cc81546a43.js"></script>
+<script src="_next/static/chunks/340-4c85e05b44fc7370.js"></script>
+<script src="_next/static/chunks/15-91b52fecfdd8e21a.js"></script>
+<script src="_next/static/chunks/780-35f43a00462f78e8.js"></script>
+<script src="_next/static/chunks/419-c9aec889e32d9e7b.js"></script>
+<script src="_next/static/chunks/131-8efcfd03f067c029.js"></script>
+<script src="_next/static/chunks/app/layout-681f1a9fe4dd4628.js"></script>
+<script src="_next/static/chunks/4b5b508e-6dceef0b9f02cb18.js"></script>
+<script src="_next/static/chunks/8-5234b317a5794281.js"></script>
+<script src="_next/static/chunks/785-3ec288b614fa287f.js"></script>
+<script src="_next/static/chunks/b536a0f1-51636bd4ac051d8f.js"></script>
+<script src="_next/static/chunks/596-40a806be0d0d2bb3.js"></script>
+<script src="_next/static/chunks/app/page-4c279de0997d388f.js"></script>
+
+<script>
+// =============================================================================
+// 1. BOOT 3D NIGHT FLOWER VALLEY ENGINE
+// =============================================================================
+self.webpackChunk_N_E.push([[90001], {}, function(r) { window.__req = r; }]);
+__req(889);
+
+const Valley = window.__GE.et();
+const audioStore = window.__GE.Y();
+let introShown = false;
+
+const valley = new Valley(
+  document.getElementById('valley'),
+  () => {
+    const l = document.getElementById('loader');
+    if (l) l.classList.add('gone');
+  },
+  () => {
+    if (!introShown) {
+      introShown = true;
+      const ui = document.getElementById('ui');
+      if (ui) ui.classList.add('on');
+    }
+  }
+);
+window.valley = valley;
+
+try { audioStore().initAudio(); } catch {}
+
+// Ambient Sound Toggle
+const sound = document.getElementById('sound');
+if (sound) {
+  sound.onclick = () => {
+    const s = audioStore();
+    if (!s.isInitialized) {
+      try { s.initAudio(); } catch {}
+    }
+    const muted = s.toggleMute();
+    sound.setAttribute('aria-pressed', String(!muted));
+    toast(muted ? "Sound muted" : "Ambient audio playing");
+  };
+}
+
+// LET'S GO button: smooth scroll into console and provision mailbox
+const heroGoBtn = document.getElementById('btn-hero-go');
+if (heroGoBtn) {
+  heroGoBtn.addEventListener('click', async () => {
+    if (valley && valley.stopHoverTransition) valley.stopHoverTransition();
+    const target = document.getElementById('console-section');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (!appState.inbox) {
+      await createInbox(true);
+    }
+  });
+}
+
+// Maintain flower auto-scroll and prevent hover dispersal on scroll
+window.addEventListener('scroll', () => {
+  if (valley && valley.stopHoverTransition) valley.stopHoverTransition();
+}, { passive: true });
+
+// =============================================================================
+// 2. ZELTON MAIL CLIENT LOGIC
+// =============================================================================
+const $ = (id) => document.getElementById(id);
+
+let toastTimer = null;
+function toast(msg) {
+  const el = $("toast");
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 3200);
+}
+
+const appState = {
+  inbox: null,
+  folder: "inbox",
+  messages: [],
+  selectedId: null,
+  currentMsgData: null,
+  viewMode: "text",
+  inboxesList: [],
+  searchQuery: "",
+};
+
+// API Helper
+async function api(path, opts = {}) {
+  const res = await fetch(path, opts);
+  const ct = res.headers.get("content-type") || "";
+  const data = ct.includes("json") ? await res.json() : await res.text();
+  if (!res.ok) throw new Error((data && data.error) || `HTTP ${res.status}`);
+  return data;
+}
+
+// Load Domain Options
+async function loadDomains() {
+  const sel = $("console-domain-select");
+  if (!sel) return;
+  try {
+    const domains = await api("/api/domains");
+    sel.innerHTML = '<option value="">Random Domain</option>';
+    for (const d of domains) {
+      const opt = document.createElement("option");
+      opt.value = d.domain;
+      opt.textContent = `@${d.domain}`;
+      sel.appendChild(opt);
+    }
+  } catch (e) {
+    sel.innerHTML = '<option value="">(Default domain)</option>';
+  }
+}
+
+// Load Stored Inboxes (API + LocalStorage Sync for Serverless Durability)
+async function loadInboxes() {
+  let localList = [];
+  try {
+    localList = JSON.parse(localStorage.getItem("zelton_inboxes") || "[]");
+  } catch {}
+
+  try {
+    const list = await api("/api/inboxes");
+    const merged = Array.isArray(list) ? [...list] : [];
+    for (const item of localList) {
+      if (!merged.some(i => (i.email || "").toLowerCase() === (item.email || "").toLowerCase())) {
+        merged.push(item);
+      }
+    }
+    appState.inboxesList = merged;
+    try { localStorage.setItem("zelton_inboxes", JSON.stringify(merged)); } catch {}
+    $("nav-inbox-count").textContent = appState.inboxesList.length;
+
+    const savedActive = localStorage.getItem("zelton_active_inbox");
+    if (savedActive && appState.inboxesList.some(i => i.email === savedActive)) {
+      selectInbox(savedActive);
+    } else if (appState.inboxesList.length > 0) {
+      if (!appState.inbox || !appState.inboxesList.some(i => i.email === appState.inbox)) {
+        selectInbox(appState.inboxesList[0].email);
+      }
+    } else {
+      await createInbox(true);
+    }
+  } catch (e) {
+    if (localList.length > 0) {
+      appState.inboxesList = localList;
+      $("nav-inbox-count").textContent = localList.length;
+      selectInbox(localList[0].email);
+    } else {
+      toast(`Sync note: ${e.message}`);
+    }
+  }
+}
+
+function selectInbox(email) {
+  appState.inbox = email;
+  try { localStorage.setItem("zelton_active_inbox", email); } catch {}
+  $("console-address-label").textContent = email;
+  $("console-otp-card").style.display = "none";
+  if (typeof closeMessageReader === "function") closeMessageReader();
+  loadMessages();
+}
+
+// Copy Text Helper
+async function copyText(text) {
+  if (!text) return false;
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (err) {}
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch (err) {
+    return false;
+  }
+}
+
+// Create Mailbox
+async function createInbox(isRandom = false) {
+  const localInput = $("console-local-user");
+  const name = isRandom ? "" : localInput.value.trim();
+  const domain = isRandom ? "" : $("console-domain-select").value;
+
+  const buttons = document.querySelectorAll("#btn-console-create, #btn-random-fresh, #btn-inboxes-new-random");
+  buttons.forEach(b => { if (b) b.disabled = true; });
+
+  try {
+    toast("Generating disposable inbox...");
+    const item = await api("/api/inboxes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, domain }),
+    });
+    if (localInput) localInput.value = "";
+    toast(`Active: ${item.email}`);
+    try {
+      const local = JSON.parse(localStorage.getItem("zelton_inboxes") || "[]").filter(i => (i.email || "").toLowerCase() !== item.email.toLowerCase());
+      local.unshift(item);
+      localStorage.setItem("zelton_inboxes", JSON.stringify(local));
+    } catch {}
+    await loadInboxes();
+    selectInbox(item.email);
+  } catch (e) {
+    toast(`Error: ${e.message}`);
+  } finally {
+    buttons.forEach(b => { if (b) b.disabled = false; });
+  }
+}
+
+// Forget Current Mailbox
+async function forgetCurrentInbox() {
+  if (!appState.inbox) return;
+  const target = appState.inbox;
+  try {
+    await api(`/api/inboxes?inbox=${encodeURIComponent(target)}&email=${encodeURIComponent(target)}`, { method: "DELETE" });
+  } catch {}
+  try {
+    const local = JSON.parse(localStorage.getItem("zelton_inboxes") || "[]").filter(i => (i.email || "").toLowerCase() !== target.toLowerCase());
+    localStorage.setItem("zelton_inboxes", JSON.stringify(local));
+    if (localStorage.getItem("zelton_active_inbox") === target) localStorage.removeItem("zelton_active_inbox");
+  } catch {}
+  toast(`Forgot ${target}`);
+  appState.inbox = null;
+  await loadInboxes();
+  if (!appState.inbox && appState.inboxesList.length > 0) {
+    selectInbox(appState.inboxesList[0].email);
+  } else if (!appState.inbox) {
+    await createInbox(true);
+  }
+}
+
+let pollCooldown = 0;
+
+// Load Messages
+async function loadMessages() {
+  if (!appState.inbox) return;
+  if (Date.now() < pollCooldown) return;
+  const container = $("console-msg-container");
+
+  try {
+    const data = await api(`/api/messages?inbox=${encodeURIComponent(appState.inbox)}&folder=${appState.folder}`);
+    appState.messages = data.messages || [];
+    renderMessages(appState.messages);
+
+    const count = data.total !== undefined ? data.total : appState.messages.length;
+    if (appState.folder === "inbox") $("inbox-count-span").textContent = count;
+    else $("spam-count-span").textContent = count;
+
+    // Check if any message in the feed contains an extracted OTP code
+    let foundCode = null;
+    for (const m of appState.messages) {
+      if (m.code) {
+        foundCode = m.code;
+        break;
+      }
+    }
+    if (foundCode && appState.folder === "inbox") {
+      showConsoleOtp(foundCode);
+    } else {
+      $("console-otp-card").style.display = "none";
+    }
+  } catch (e) {
+    if (e.message && e.message.includes("limit of 30")) {
+      pollCooldown = Date.now() + 15000;
+      toast("API cooling down (15s backoff)...");
+      return;
+    }
+    container.innerHTML = `<div style="font-size:12px;color:var(--danger);text-align:center;padding:24px">${escapeHtml(e.message)}</div>`;
+  }
+}
+
+function showConsoleOtp(code) {
+  $("console-otp-digits").textContent = code;
+  $("console-otp-card").style.display = "flex";
+  $("btn-copy-otp").onclick = async () => {
+    const ok = await copyText(code);
+    toast(ok ? `Copied OTP: ${code}` : `OTP: ${code}`);
+  };
+}
+
+// Render Message Rows
+function renderMessages(messages) {
+  const container = $("console-msg-container");
+  container.innerHTML = "";
+
+  const query = appState.searchQuery.toLowerCase().trim();
+  const filtered = query
+    ? messages.filter(m => (m.from || "").toLowerCase().includes(query) || (m.subject || "").toLowerCase().includes(query))
+    : messages;
+
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty-state">No dispatches in ${appState.folder}.</div>`;
+    return;
+  }
+
+  for (const m of filtered) {
+    const row = document.createElement("div");
+    row.className = `msg-row ${appState.selectedId === m.id ? "active" : ""}`;
+
+    const dateStr = m.date ? new Date(m.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+    const otpBadge = m.code ? `<span class="msg-otp-tag">OTP: ${escapeHtml(m.code)}</span>` : "";
+
+    row.innerHTML = `
+      <div class="msg-row-main">
+        <span class="msg-row-from">${escapeHtml(m.from || "(unknown sender)")}</span>
+        <span class="msg-row-subj">${escapeHtml(m.subject || "(no subject)")}</span>
+      </div>
+      <div class="msg-row-side">
+        ${otpBadge}
+        <span class="msg-row-date">${dateStr}</span>
+      </div>
+    `;
+    row.addEventListener("click", () => openMessageReader(m.id));
+    container.appendChild(row);
+  }
+}
+
+// Open Message Reader (Integrated Console Reader + Modal sync)
+async function openMessageReader(id) {
+  appState.selectedId = id;
+  renderMessages(appState.messages);
+
+  // Transition Console Card into Email Reader View
+  const feedPanel = $("feed-view-panel");
+  const readerPanel = $("email-reader-panel");
+  if (feedPanel) feedPanel.style.display = "none";
+  if (readerPanel) readerPanel.classList.add("open");
+
+  // Reset reader fields with loading state
+  $("panel-subject").textContent = "Loading dispatch...";
+  $("panel-from").textContent = "";
+  $("panel-to").textContent = "";
+  $("panel-date").textContent = "";
+  $("panel-text-content").textContent = "Retrieving dispatch content...";
+  $("panel-text-content").style.display = "block";
+  $("panel-html-frame").style.display = "none";
+  $("panel-otp-box").style.display = "none";
+  $("panel-att-wrap").style.display = "none";
+
+  // Sync Scheda Modal in background
+  $("scheda-subject").textContent = "Loading dispatch...";
+  $("scheda-text-content").textContent = "Retrieving dispatch content...";
+
+  try {
+    const msg = await api(`/api/message?inbox=${encodeURIComponent(appState.inbox)}&id=${encodeURIComponent(id)}&folder=${appState.folder}`);
+    appState.currentMsgData = msg;
+
+    const subjectStr = msg.subject || "(no subject)";
+    const fromStr = msg.from || "(unknown sender)";
+    const toStr = msg.to || appState.inbox;
+    const dateStr = msg.date ? new Date(msg.date).toLocaleString() : "";
+
+    // Set Header Data
+    $("panel-subject").textContent = subjectStr;
+    $("panel-from").textContent = fromStr;
+    $("panel-to").textContent = toStr;
+    $("panel-date").textContent = dateStr;
+
+    $("scheda-subject").textContent = subjectStr;
+    $("scheda-from").textContent = fromStr;
+    $("scheda-to").textContent = toStr;
+    $("scheda-date").textContent = dateStr;
+
+    // Handle OTP code
+    if (msg.code) {
+      $("panel-otp-code").textContent = msg.code;
+      $("panel-otp-box").style.display = "flex";
+      $("scheda-otp-code").textContent = msg.code;
+      $("scheda-otp-container").style.display = "flex";
+      showConsoleOtp(msg.code);
+    } else {
+      $("panel-otp-box").style.display = "none";
+      $("scheda-otp-container").style.display = "none";
+    }
+
+    // Body Content
+    const textContent = msg.text || msg.body_text || msg.body || "(Empty message body)";
+    $("panel-text-content").textContent = textContent;
+    $("scheda-text-content").textContent = textContent;
+
+    const htmlContent = msg.html || msg.body_html || "";
+    if (htmlContent) {
+      $("panel-html-frame").srcdoc = htmlContent;
+      $("scheda-html-frame").srcdoc = htmlContent;
+      $("panel-tab-html").style.display = "inline-block";
+      $("tab-view-html").style.display = "inline-block";
+      switchPanelMode("html");
+      switchViewMode("html");
+    } else {
+      $("panel-tab-html").style.display = "none";
+      $("tab-view-html").style.display = "none";
+      switchPanelMode("text");
+      switchViewMode("text");
+    }
+
+    // Attachments
+    const attList = msg.attachments || [];
+    if (attList.length > 0) {
+      $("panel-att-wrap").style.display = "flex";
+      $("panel-att-count").textContent = attList.length;
+      $("scheda-attachments-wrap").style.display = "flex";
+      $("scheda-att-count").textContent = attList.length;
+
+      const pList = $("panel-att-list");
+      const sList = $("scheda-att-list");
+      pList.innerHTML = "";
+      sList.innerHTML = "";
+
+      attList.forEach((att, idx) => {
+        const attIdx = att.index !== undefined ? att.index : (att.attachment_index !== undefined ? att.attachment_index : idx);
+        const url = `/api/attachment?inbox=${encodeURIComponent(appState.inbox)}&id=${encodeURIComponent(id)}&index=${encodeURIComponent(attIdx)}&filename=${encodeURIComponent(att.filename || att.name || "attachment")}`;
+        const fname = escapeHtml(att.filename || att.name || "File");
+
+        const chip1 = document.createElement("a");
+        chip1.className = "scheda-att-chip";
+        chip1.href = url;
+        chip1.target = "_blank";
+        chip1.download = att.filename || att.name || "attachment";
+        chip1.innerHTML = `📎 <span>${fname}</span>`;
+        pList.appendChild(chip1);
+
+        const chip2 = chip1.cloneNode(true);
+        sList.appendChild(chip2);
+      });
+    } else {
+      $("panel-att-wrap").style.display = "none";
+      $("scheda-attachments-wrap").style.display = "none";
+    }
+
+    // Scroll smoothly to ensure reader is in view
+    const card = $("console-section");
+    if (card) {
+      const topOffset = card.getBoundingClientRect().top + window.pageYOffset - 20;
+      window.scrollTo({ top: topOffset, behavior: "smooth" });
+    }
+  } catch (e) {
+    $("panel-text-content").textContent = `Error loading dispatch: ${e.message}`;
+    $("panel-text-content").style.display = "block";
+    $("panel-html-frame").style.display = "none";
+  }
+}
+
+function closeMessageReader() {
+  const feedPanel = $("feed-view-panel");
+  const readerPanel = $("email-reader-panel");
+  if (readerPanel) readerPanel.classList.remove("open");
+  if (feedPanel) feedPanel.style.display = "block";
+  appState.selectedId = null;
+  renderMessages(appState.messages);
+}
+
+function switchPanelMode(mode) {
+  if (mode === "html") {
+    $("panel-tab-html").classList.add("active");
+    $("panel-tab-text").classList.remove("active");
+    $("panel-html-frame").style.display = "block";
+    $("panel-text-content").style.display = "none";
+  } else {
+    $("panel-tab-text").classList.add("active");
+    $("panel-tab-html").classList.remove("active");
+    $("panel-text-content").style.display = "block";
+    $("panel-html-frame").style.display = "none";
+  }
+}
+
+function switchViewMode(mode) {
+  appState.viewMode = mode;
+  if (mode === "text") {
+    $("tab-view-text").classList.add("active");
+    $("tab-view-html").classList.remove("active");
+    $("scheda-text-content").style.display = "block";
+    $("scheda-html-frame").style.display = "none";
+  } else {
+    $("tab-view-html").classList.add("active");
+    $("tab-view-text").classList.remove("active");
+    $("scheda-text-content").style.display = "none";
+    $("scheda-html-frame").style.display = "block";
+  }
+}
+
+function closeScheda() {
+  $("scheda-overlay").classList.remove("open");
+}
+
+function updateFrameHeight(frame) {
+  try {
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    if (doc && doc.body) {
+      const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight, 480);
+      frame.style.height = `${h + 24}px`;
+    }
+  } catch {}
+}
+
+// Saved Inboxes Modal
+function openInboxesModal() {
+  $("inboxes-modal").classList.add("open");
+  renderInboxesModalList();
+}
+
+function renderInboxesModalList() {
+  const container = $("inboxes-list-container");
+  container.innerHTML = "";
+
+  if (!appState.inboxesList.length) {
+    container.innerHTML = '<div style="text-align:center;padding:24px;font-family:var(--font-mono);font-size:12px;color:rgba(245,239,226,0.4)">No stored mailboxes found.</div>';
+    return;
+  }
+
+  for (const item of appState.inboxesList) {
+    const isCurrent = item.email === appState.inbox;
+    const div = document.createElement("div");
+    div.className = `inbox-list-row ${isCurrent ? "current" : ""}`;
+    div.innerHTML = `
+      <div style="min-width:0;display:flex;flex-direction:column;gap:3px">
+        <span style="font-family:var(--font-mono);font-size:13px;color:var(--cream);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(item.email)}</span>
+        <span style="font-family:var(--font-mono);font-size:11px;color:rgba(245,239,226,0.5)">Domain: @${escapeHtml(item.domain || "")}</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        ${isCurrent ? '<span style="font-family:var(--font-mono);font-size:11px;color:var(--caldo);padding:4px 8px">ACTIVE</span>' : `<button class="btn-action-text" data-select="${escapeHtml(item.email)}" style="font-size:11px">SELECT</button>`}
+        <button class="btn-action-text danger" data-del="${escapeHtml(item.email)}" style="font-size:11px">FORGET</button>
+      </div>
+    `;
+
+    const selBtn = div.querySelector("[data-select]");
+    if (selBtn) {
+      selBtn.addEventListener("click", () => {
+        selectInbox(item.email);
+        $("inboxes-modal").classList.remove("open");
+        toast(`Selected ${item.email}`);
+      });
+    }
+
+    const delBtn = div.querySelector("[data-del]");
+    if (delBtn) {
+      delBtn.addEventListener("click", async () => {
+        try {
+          await api(`/api/inboxes?inbox=${encodeURIComponent(item.email)}&email=${encodeURIComponent(item.email)}`, { method: "DELETE" });
+          toast(`Deleted ${item.email}`);
+          await loadInboxes();
+          renderInboxesModalList();
+        } catch (e) {
+          toast(`Error: ${e.message}`);
+        }
+      });
+    }
+
+    container.appendChild(div);
+  }
+}
+
+function escapeHtml(s) {
+  return String(s || "").replace(/[&<>"']/g, (m) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;" })[m]);
+}
+
+// Event Listeners Wire-up
+$("btn-copy-address").addEventListener("click", async () => {
+  if (appState.inbox) {
+    const ok = await copyText(appState.inbox);
+    toast(ok ? `Copied: ${appState.inbox}` : `${appState.inbox}`);
+  }
+});
+$("btn-copy-otp").addEventListener("click", async () => {
+  const code = $("console-otp-digits").textContent.trim();
+  if (code && code !== "------") {
+    const ok = await copyText(code);
+    toast(ok ? `Copied OTP: ${code}` : `OTP: ${code}`);
+  }
+});
+$("btn-scheda-copy-otp").addEventListener("click", async () => {
+  const code = $("scheda-otp-code").textContent.trim();
+  if (code && code !== "------") {
+    const ok = await copyText(code);
+    toast(ok ? `Copied OTP: ${code}` : `OTP: ${code}`);
+  }
+});
+$("btn-random-fresh").addEventListener("click", () => createInbox(true));
+$("btn-console-create").addEventListener("click", () => createInbox(false));
+$("btn-forget-mailbox").addEventListener("click", forgetCurrentInbox);
+$("btn-saved-inboxes").addEventListener("click", openInboxesModal);
+$("btn-inboxes-close").addEventListener("click", () => $("inboxes-modal").classList.remove("open"));
+
+$("console-local-user").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") createInbox(false);
+});
+
+$("btn-refresh-feed").addEventListener("click", () => {
+  toast("Refreshing dispatches...");
+  loadMessages();
+});
+
+$("tab-inbox").addEventListener("click", () => {
+  appState.folder = "inbox";
+  $("tab-inbox").classList.add("active");
+  $("tab-spam").classList.remove("active");
+  loadMessages();
+});
+
+$("tab-spam").addEventListener("click", () => {
+  appState.folder = "spam";
+  $("tab-spam").classList.add("active");
+  $("tab-inbox").classList.remove("active");
+  loadMessages();
+});
+
+$("console-search-box").addEventListener("input", (e) => {
+  appState.searchQuery = e.target.value;
+  renderMessages(appState.messages);
+});
+
+// Integrated Reader Panel Controls
+$("btn-back-to-inbox").addEventListener("click", closeMessageReader);
+$("panel-tab-html").addEventListener("click", () => switchPanelMode("html"));
+$("panel-tab-text").addEventListener("click", () => switchPanelMode("text"));
+$("btn-panel-copy-body").addEventListener("click", async () => {
+  if (appState.currentMsgData) {
+    const body = appState.currentMsgData.text || appState.currentMsgData.body || "";
+    const ok = await copyText(body);
+    toast(ok ? "Copied message body" : "Message body copied");
+  }
+});
+$("btn-panel-expand").addEventListener("click", () => {
+  $("scheda-overlay").classList.add("open");
+});
+$("btn-panel-copy-otp").addEventListener("click", async () => {
+  const code = $("panel-otp-code").textContent.trim();
+  if (code && code !== "------") {
+    const ok = await copyText(code);
+    toast(ok ? `Copied OTP: ${code}` : `OTP: ${code}`);
+  }
+});
+const panelFrame = $("panel-html-frame");
+if (panelFrame) {
+  panelFrame.addEventListener("load", () => updateFrameHeight(panelFrame));
+}
+
+// Scheda Modal Controls
+$("btn-scheda-close").addEventListener("click", closeScheda);
+$("tab-view-text").addEventListener("click", () => switchViewMode("text"));
+$("tab-view-html").addEventListener("click", () => switchViewMode("html"));
+$("btn-scheda-copy-body").addEventListener("click", async () => {
+  if (appState.currentMsgData) {
+    const body = appState.currentMsgData.text || appState.currentMsgData.body || "";
+    const ok = await copyText(body);
+    toast(ok ? "Copied message body" : "Message body copied");
+  }
+});
+
+$("btn-inboxes-new-random").addEventListener("click", async () => {
+  await createInbox(true);
+  renderInboxesModalList();
+});
+
+$("btn-inboxes-clear-all").addEventListener("click", async () => {
+  if (!confirm("Purge all stored disposable mailboxes?")) return;
+  for (const item of appState.inboxesList) {
+    try {
+      await api(`/api/inboxes?inbox=${encodeURIComponent(item.email)}&email=${encodeURIComponent(item.email)}`, { method: "DELETE" });
+    } catch (e) {}
+  }
+  toast("Purged all mailboxes");
+  await loadInboxes();
+  renderInboxesModalList();
+});
+
+// Close modals on Escape key or backdrop click
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    $("scheda-overlay").classList.remove("open");
+    $("inboxes-modal").classList.remove("open");
+  }
+});
+for (const overlay of document.querySelectorAll(".scheda-overlay")) {
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("open");
+    }
+  });
+}
+
+// Background Auto-Refresh Poller (10s non-overlapping, pauses when tab is hidden)
+let pollTimer = null;
+async function schedulePoll() {
+  clearTimeout(pollTimer);
+  if (appState.inbox && !document.hidden && Date.now() >= pollCooldown) {
+    try {
+      await loadMessages();
+    } catch {}
+  }
+  const nextDelay = Date.now() < pollCooldown ? Math.max(5000, pollCooldown - Date.now()) : 10000;
+  pollTimer = setTimeout(schedulePoll, nextDelay);
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && appState.inbox) {
+    schedulePoll();
+  }
+});
+
+// Initialize
+(async function init() {
+  await loadDomains();
+  await loadInboxes();
+  schedulePoll();
+})();
+</script>
+</body>
+</html>
