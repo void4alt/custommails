@@ -1080,4 +1080,14 @@ if (require.main === module) {
   startServer();
 }
 
-module.exports = { createRequestHandler, startServer, ApiClient, Store, extractCode, htmlToText, parseMime, fetchFullBodyImap };
+const defaultHandler = createRequestHandler();
+defaultHandler.createRequestHandler = createRequestHandler;
+defaultHandler.startServer = startServer;
+defaultHandler.ApiClient = ApiClient;
+defaultHandler.Store = Store;
+defaultHandler.extractCode = extractCode;
+defaultHandler.htmlToText = htmlToText;
+defaultHandler.parseMime = parseMime;
+defaultHandler.fetchFullBodyImap = fetchFullBodyImap;
+
+module.exports = defaultHandler;

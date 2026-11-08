@@ -1,7 +1,5 @@
-const { createRequestHandler } = require("../server");
+const defaultHandler = require("../server");
 
-const handler = createRequestHandler();
-
-module.exports = async (req, res) => {
-  return handler(req, res);
+module.exports = (req, res) => {
+  return defaultHandler(req, res);
 };
