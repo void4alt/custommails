@@ -95,22 +95,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .scheda-overlay, .scheda-overlay * { pointer-events: auto; }
 .corner-dock, .corner-dock * { pointer-events: auto; }
 
-/* ---- Hero Viewport Section (Screen 1) ---- */
+/* ---- Hero Section: Sleek Integrated Header ---- */
 .hero-screen {
   position: relative;
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 24px;
+  padding: calc(44 * var(--u)) 24px calc(24 * var(--u));
 }
 
 .hero-title {
   font-family: var(--font-antonio);
   font-weight: 400;
-  font-size: calc(158 * var(--u));
+  font-size: calc(118 * var(--u));
   line-height: 0.92;
   letter-spacing: -0.012em;
   text-transform: uppercase;
@@ -120,8 +120,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .hero-sub {
-  margin-top: calc(32 * var(--u));
-  font-size: calc(18 * var(--u));
+  margin-top: calc(16 * var(--u));
+  font-size: calc(16 * var(--u));
   font-weight: 400;
   line-height: 1.4;
   color: rgba(245, 239, 226, 0.7);
@@ -132,18 +132,18 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ---- LET'S GO Button ---- */
 .btn-lets-go {
-  margin-top: calc(44 * var(--u));
+  margin-top: calc(24 * var(--u));
   display: inline-flex;
   align-items: center;
-  gap: calc(14 * var(--u));
-  height: calc(56 * var(--u));
-  padding: 0 calc(36 * var(--u));
+  gap: calc(12 * var(--u));
+  height: calc(52 * var(--u));
+  padding: 0 calc(32 * var(--u));
   border-radius: 99px;
   border: 1.5px solid var(--cream);
   background: transparent;
   color: var(--cream);
   font-family: var(--font-manrope);
-  font-size: calc(15 * var(--u));
+  font-size: calc(14 * var(--u));
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -219,7 +219,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: relative;
   width: 100%;
   max-width: 1080px;
-  margin: 0 auto 120px;
+  margin: 0 auto calc(60 * var(--u));
   padding: 0 24px;
 }
 
@@ -1024,10 +1024,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 @media (max-width: 820px) {
   :root { --u: 1px; }
-  .hero-title { font-size: clamp(48px, 16vw, 84px); }
-  .hero-sub { font-size: 15px; }
-  .btn-lets-go { height: 48px; padding: 0 24px; font-size: 13px; }
+  .hero-screen { padding: 36px 20px 20px; min-height: auto; }
+  .hero-title { font-size: clamp(48px, 12vw, 76px); }
+  .hero-sub { font-size: 14px; margin-top: 10px; }
+  .btn-lets-go { height: 48px; padding: 0 28px; font-size: 13px; margin-top: 18px; }
   .corner-dock { right: 20px; bottom: 24px; font-size: 11px; }
+  .console-section { padding: 0 16px; margin: 0 auto 50px; }
   .console-header-bar { padding: 16px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
   .console-address-banner { padding: 20px; }
   .console-create-row { padding: 14px 20px; }
@@ -1039,30 +1041,30 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 @media (max-width: 640px) {
   .hero-screen {
-    padding: 0 16px;
-    min-height: 100svh;
+    padding: 24px 16px 14px;
+    min-height: auto;
   }
   .hero-title {
-    font-size: clamp(42px, 15vw, 68px);
+    font-size: clamp(38px, 12vw, 54px);
     letter-spacing: -0.01em;
   }
   .hero-sub {
-    font-size: 13px;
-    margin-top: 20px;
+    font-size: 12.5px;
+    margin-top: 8px;
     letter-spacing: 0.03em;
-    padding: 0 10px;
+    padding: 0 6px;
   }
   .btn-lets-go {
-    margin-top: 32px;
-    height: 48px;
-    padding: 0 24px;
-    font-size: 13px;
+    margin-top: 16px;
+    height: 44px;
+    padding: 0 22px;
+    font-size: 12.5px;
     -webkit-tap-highlight-color: transparent;
   }
 
   .console-section {
     padding: 0 12px;
-    margin: 0 auto 60px;
+    margin: 0 auto 40px;
     max-width: 100%;
   }
   .console-card {
@@ -1487,8 +1489,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
           <span style="font-size:14px;font-family:var(--font-mono);letter-spacing:0.08em;color:var(--caldo)">DISPATCH CONSOLE</span>
         </div>
         <div class="console-status-badge">
-          <span class="console-status-dot"></span>
-          <span id="console-status-tag">AUTO-SYNC ACTIVE</span>
+          <span class="console-status-dot" style="background:var(--caldo);box-shadow:0 0 8px var(--caldo)"></span>
+          <span id="console-status-tag" style="color:var(--caldo)">READY · CLICK TO GENERATE</span>
         </div>
         <div class="console-header-actions">
           <button class="btn-action-text" id="btn-saved-inboxes">SAVED (<span id="nav-inbox-count">0</span>)</button>
@@ -1500,7 +1502,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
       <div class="console-address-banner">
         <div class="address-info">
           <span class="address-kicker">Active Disposable Mailbox</span>
-          <span class="address-val" id="console-address-label">Generating mailbox...</span>
+          <span class="address-val" id="console-address-label" style="opacity:0.75">Click "LET'S GO" to generate mailbox</span>
         </div>
         <div class="address-controls">
           <button class="btn-copy-address" id="btn-copy-address" title="Copy mailbox address to clipboard">
@@ -1750,18 +1752,16 @@ if (sound) {
   };
 }
 
-// LET'S GO button: smooth scroll into console and provision mailbox
+// LET'S GO button: generate disposable mailbox on click
 const heroGoBtn = document.getElementById('btn-hero-go');
 if (heroGoBtn) {
   heroGoBtn.addEventListener('click', async () => {
     if (valley && valley.stopHoverTransition) valley.stopHoverTransition();
     const target = document.getElementById('console-section');
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    if (!appState.inbox) {
-      await createInbox(true);
-    }
+    await createInbox(true);
   });
 }
 
@@ -1850,7 +1850,7 @@ async function loadInboxes() {
         selectInbox(appState.inboxesList[0].email);
       }
     } else {
-      await createInbox(true);
+      setIdleState();
     }
   } catch (e) {
     if (localList.length > 0) {
@@ -1858,15 +1858,61 @@ async function loadInboxes() {
       $("nav-inbox-count").textContent = localList.length;
       selectInbox(localList[0].email);
     } else {
-      toast(`Sync note: ${e.message}`);
+      setIdleState();
     }
   }
 }
 
+function setIdleState() {
+  appState.inbox = null;
+  const label = $("console-address-label");
+  if (label) {
+    label.textContent = "Click \"LET'S GO\" to generate mailbox";
+    label.style.opacity = "0.75";
+  }
+  const tag = $("console-status-tag");
+  if (tag) {
+    tag.textContent = "READY · CLICK TO GENERATE";
+    tag.style.color = "var(--caldo)";
+  }
+  const dot = document.querySelector(".console-status-dot");
+  if (dot) {
+    dot.style.background = "var(--caldo)";
+    dot.style.boxShadow = "0 0 8px var(--caldo)";
+  }
+  const otpCard = $("console-otp-card");
+  if (otpCard) otpCard.style.display = "none";
+  if (typeof closeMessageReader === "function") closeMessageReader();
+  const container = $("console-msg-container");
+  if (container) {
+    container.innerHTML = '<div class="empty-state"><span style="font-size:22px;display:block;margin-bottom:8px">📬</span>No active mailbox.<br>Click <strong>LET\'S GO</strong> or <strong>RANDOM NEW</strong> to generate an instant disposable email.</div>';
+  }
+  if ($("inbox-count-span")) $("inbox-count-span").textContent = "0";
+  if ($("spam-count-span")) $("spam-count-span").textContent = "0";
+}
+
 function selectInbox(email) {
+  if (!email) {
+    setIdleState();
+    return;
+  }
   appState.inbox = email;
   try { localStorage.setItem("zelton_active_inbox", email); } catch {}
-  $("console-address-label").textContent = email;
+  const label = $("console-address-label");
+  if (label) {
+    label.textContent = email;
+    label.style.opacity = "1";
+  }
+  const tag = $("console-status-tag");
+  if (tag) {
+    tag.textContent = "AUTO-SYNC ACTIVE";
+    tag.style.color = "var(--success)";
+  }
+  const dot = document.querySelector(".console-status-dot");
+  if (dot) {
+    dot.style.background = "var(--success)";
+    dot.style.boxShadow = "0 0 8px var(--success)";
+  }
   $("console-otp-card").style.display = "none";
   if (typeof closeMessageReader === "function") closeMessageReader();
   loadMessages();
@@ -1946,7 +1992,7 @@ async function forgetCurrentInbox() {
   if (!appState.inbox && appState.inboxesList.length > 0) {
     selectInbox(appState.inboxesList[0].email);
   } else if (!appState.inbox) {
-    await createInbox(true);
+    setIdleState();
   }
 }
 
@@ -2279,6 +2325,8 @@ $("btn-copy-address").addEventListener("click", async () => {
   if (appState.inbox) {
     const ok = await copyText(appState.inbox);
     toast(ok ? `Copied: ${appState.inbox}` : `${appState.inbox}`);
+  } else {
+    toast("Click LET'S GO or RANDOM NEW to create an inbox first!");
   }
 });
 $("btn-copy-otp").addEventListener("click", async () => {
