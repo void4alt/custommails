@@ -4,5 +4,16 @@
     "server.js": {
       "includeFiles": "{_next/**,valley/**,fonts/**,index.html,three.min.js}"
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/(.*\\.html|)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate, max-age=0"
+        }
+      ]
+    }
+  ]
 }

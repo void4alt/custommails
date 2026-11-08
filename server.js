@@ -666,11 +666,16 @@ function createRequestHandler(opts = {}) {
         return sendError("Not found", 404);
       }
       const data = fs.readFileSync(filePath);
+      const isHtml = contentType.includes("html");
+      const cacheControl = isHtml
+        ? "no-cache, no-store, must-revalidate, max-age=0"
+        : "public, max-age=3600";
       res.writeHead(200, {
         "Content-Type": contentType,
         "Content-Length": data.length,
         "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "public, max-age=3600",
+        "Cache-Control": cacheControl,
+        ...(isHtml ? { "Pragma": "no-cache", "Expires": "0" } : {})
       });
       res.end(data);
     }
