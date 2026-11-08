@@ -627,7 +627,8 @@ function createRequestHandler(opts = {}) {
 
   const handler = async (req, res) => {
     const hostHeader = req.headers.host || "localhost";
-    const parsedUrl = new URL(req.url, `http://${hostHeader}`);
+    const reqPath = req.headers["x-matched-path"] || req.url;
+    const parsedUrl = new URL(reqPath, `http://${hostHeader}`);
     const pathname = parsedUrl.pathname;
     const query = Object.fromEntries(parsedUrl.searchParams.entries());
 
