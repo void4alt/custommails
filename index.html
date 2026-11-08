@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ZELTON MAIL — Disposable Email & Instant OTP Verification</title>
 <meta name="description" content="Zelton Mail. Disposable temporary inboxes and instant OTP code resolution over an interactive night valley.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -1035,6 +1035,418 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .feed-toolbar { padding: 14px 20px; }
   .feed-search-input { width: 100%; }
   .feed-search-input:focus { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .hero-screen {
+    padding: 0 16px;
+    min-height: 100svh;
+  }
+  .hero-title {
+    font-size: clamp(42px, 15vw, 68px);
+    letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    font-size: 13px;
+    margin-top: 20px;
+    letter-spacing: 0.03em;
+    padding: 0 10px;
+  }
+  .btn-lets-go {
+    margin-top: 32px;
+    height: 48px;
+    padding: 0 24px;
+    font-size: 13px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .console-section {
+    padding: 0 12px;
+    margin: 0 auto 60px;
+    max-width: 100%;
+  }
+  .console-card {
+    border-radius: 16px;
+  }
+
+  /* Header Bar */
+  .console-header-bar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .console-brand-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 17px;
+  }
+  .console-header-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 8px;
+  }
+  .btn-action-text {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 10px;
+    font-size: 11.5px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Address Banner */
+  .console-address-banner {
+    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .address-info {
+    width: 100%;
+    min-width: 0;
+  }
+  .address-kicker {
+    font-size: 10px;
+  }
+  .address-val {
+    font-size: clamp(19px, 5.5vw, 25px);
+    line-height: 1.2;
+    word-break: break-all;
+    white-space: normal;
+  }
+  .address-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 8px;
+  }
+  .btn-copy-address, .btn-random-fresh {
+    width: 100%;
+    justify-content: center;
+    height: 46px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Create Row */
+  .console-create-row {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .create-input-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+  }
+  /* font-size: 16px prevents iOS Safari from automatically zooming into inputs */
+  .custom-input {
+    width: 100%;
+    height: 46px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  .custom-select {
+    width: 100%;
+    height: 46px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  .btn-create-submit {
+    width: 100%;
+    height: 46px;
+    font-size: 13px;
+    border-radius: 8px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* OTP Banner */
+  .console-otp-card {
+    margin: 12px 14px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    text-align: center;
+    border-radius: 12px;
+  }
+  .otp-label-group {
+    align-items: center;
+    text-align: center;
+  }
+  .otp-code-display {
+    font-size: clamp(28px, 9vw, 36px);
+    letter-spacing: 0.12em;
+    text-align: center;
+  }
+  .btn-copy-otp {
+    width: 100%;
+    height: 46px;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Feed Controls */
+  .feed-toolbar {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .feed-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 8px;
+  }
+  .feed-tab {
+    text-align: center;
+    justify-content: center;
+    padding: 10px 0;
+    font-size: 14.5px;
+  }
+  .feed-search-input {
+    width: 100%;
+    height: 44px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  .feed-search-input:focus {
+    width: 100%;
+  }
+  .btn-refresh {
+    justify-content: center;
+    padding: 8px 0;
+    font-size: 12px;
+    min-height: 38px;
+  }
+
+  /* Message List */
+  .messages-list-wrap {
+    min-height: 180px;
+    max-height: 60vh;
+    -webkit-overflow-scrolling: touch;
+  }
+  .msg-row {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .msg-row-main {
+    width: 100%;
+    gap: 3px;
+  }
+  .msg-row-from {
+    font-size: 11.5px;
+  }
+  .msg-row-subj {
+    font-size: 13.5px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.35;
+  }
+  .msg-row-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2px;
+  }
+  .msg-otp-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    font-weight: 700;
+  }
+  .msg-row-date {
+    font-size: 10.5px;
+    margin-left: auto;
+  }
+
+  /* Email Reader Panel */
+  .reader-toolbar {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .reader-toolbar-left {
+    width: 100%;
+  }
+  .btn-back-inbox {
+    width: 100%;
+    justify-content: center;
+    height: 44px;
+    font-size: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .reader-toolbar-right {
+    width: 100%;
+    justify-content: center;
+  }
+  .reader-mode-tabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .reader-mode-tab {
+    text-align: center;
+    padding: 8px 0;
+    font-size: 11px;
+  }
+  .reader-header-box {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .reader-subject-title {
+    font-size: clamp(19px, 5.5vw, 24px);
+    word-break: break-word;
+    line-height: 1.25;
+  }
+  .reader-meta-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 11px;
+  }
+  .reader-otp-callout {
+    margin: 12px 14px 0;
+    padding: 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  .reader-otp-digits {
+    font-size: 26px;
+    text-align: center;
+  }
+  .reader-body-container {
+    padding: 14px 16px;
+    min-height: 260px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reader-plain-text {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .reader-html-frame {
+    min-height: 380px;
+  }
+  .reader-att-box {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Scheda Modal (Dispatch Reader) */
+  .scheda-overlay {
+    padding: 10px;
+    align-items: flex-end;
+  }
+  .scheda-dialog {
+    max-height: 92vh;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+  }
+  .scheda-header {
+    padding: 16px;
+    gap: 8px;
+  }
+  .scheda-subject {
+    font-size: 19px;
+    word-break: break-word;
+  }
+  .scheda-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    font-size: 11px;
+  }
+  .scheda-otp-banner {
+    margin: 10px 14px 0;
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    text-align: center;
+  }
+  .scheda-otp-digits {
+    font-size: 24px;
+    text-align: center;
+  }
+  .scheda-view-tabs {
+    padding: 10px 14px;
+  }
+  .scheda-body-scroll {
+    padding: 14px 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scheda-attachments-wrap {
+    padding: 10px 14px;
+  }
+
+  /* Saved Inboxes Modal */
+  .inboxes-dialog {
+    max-height: 85vh;
+    border-radius: 16px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+  .inboxes-dialog-header {
+    padding: 14px 16px;
+  }
+  .inboxes-list-body {
+    padding: 12px 14px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .inbox-list-row {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Sound / Dock Control */
+  .corner-dock {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    gap: 0;
+  }
+  .corner-dock span,
+  .corner-dock i {
+    display: none;
+  }
+  .sound-btn {
+    width: 44px;
+    height: 44px;
+    background: rgba(12, 12, 10, 0.75);
+    border: 1px solid var(--border-cream);
+    border-radius: 50%;
+    padding: 10px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .loader span { animation: none; }
