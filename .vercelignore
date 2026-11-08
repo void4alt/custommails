@@ -1,6 +1,12 @@
 awesome-ai-agents
 fernhollow-standalone.html
-*.png
+shot*.png
+test_*.png
+tilt_test.png
+scrolled_console_view.png
+v_*.png
+debug_*.png
+cam_pct_*.png
 *.py
 *.pyc
 __pycache__

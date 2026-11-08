@@ -707,8 +707,8 @@ function createRequestHandler(opts = {}) {
         return serveFile(path.join(HERE, "fonts", fontFile), "font/woff2");
       }
       if (pathname.startsWith("/_next/") || pathname.startsWith("/valley/")) {
-        const safeRel = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, "");
-        const fullLocal = path.join(HERE, safeRel);
+        const cleanPath = pathname.replace(/^\/+/, "").replace(/\.\.[\/\\]/g, "");
+        const fullLocal = path.join(HERE, cleanPath);
         if (fs.existsSync(fullLocal) && fs.statSync(fullLocal).isFile()) {
           const ext = path.extname(fullLocal).toLowerCase();
           const mimeTypes = {
