@@ -1,136 +1,151 @@
-# Zeltcon Checker
+# 📬 Zelton Mail (CustomMails)
 
-A dark, high-contrast temporary email & instant OTP verification engine with an editorial aesthetic inspired by Lorenzo Lottici and interactive Three.js 3D kinetic geometry.
-Backed by high-speed Node.js and Python servers with zero external npm dependencies.
+<div align="center">
 
-Receives genuine email/OTP dispatches — not a simulated demo. Local web dashboard + CLI.
+![Zelton Mail Hero Banner](assets/hero-desktop.png)
 
-## Quick Run
+**A minimalist, high-contrast disposable email engine and instant OTP verification console with an interactive Three.js 3D Night Flower Valley canvas.**
 
+[![Live Web App](https://img.shields.io/badge/🚀%20Live%20App-Vercel-black?style=for-the-badge&logo=vercel)](https://custommails.vercel.app/)
+[![Engine](https://img.shields.io/badge/Engine-Three.js%20WebGL-blue?style=for-the-badge&logo=three.js)](https://threejs.org/)
+[![Runtime](https://img.shields.io/badge/Server-Node.js%20%2F%20Python-4caf50?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20External%20NPM-orange?style=for-the-badge)](package.json)
+[![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
+
+[**✨ Open Live Mailbox**](https://custommails.vercel.app/) • [**⚡ Instant OTP System**](#-instant-otp-resolution) • [**📱 Mobile Experience**](#-mobile-responsive-console) • [**🚀 Running Locally**](#-running-locally)
+
+</div>
+
+---
+
+## 🌟 Overview
+
+**Zelton Mail** combines real disposable email dispatching with a peaceful interactive 3D WebGL flower valley aesthetic. Backed by lightweight server engines (zero-dependency Node.js and native Python 3), it allows you to generate temporary mailboxes on the fly, bypass signup gates, and receive incoming verification codes (OTPs) without exposing your personal inbox.
+
+---
+
+## 📸 Interface Showcase
+
+<div align="center">
+
+### Desktop Dispatch Console
+![Zelton Mail Live Dispatch Console](assets/console-desktop.png)
+
+*Instant 1-click address copy, active mailbox status, real-time polling, and OTP extraction badge.*
+
+<br/>
+
+### Mobile Optimized Layout
+<p align="center">
+  <img src="assets/mobile-hero.png" width="31%" alt="Mobile Hero Screen" />
+  &nbsp;
+  <img src="assets/mobile-console.png" width="31%" alt="Mobile Console View" />
+  &nbsp;
+  <img src="assets/mobile-reader.png" width="31%" alt="Mobile Email Reader" />
+</p>
+
+*Touch-friendly compact header, swipeable message lists, and dedicated mobile drawer reader.*
+
+</div>
+
+---
+
+## ✨ Core Features
+
+- **3D Interactive Flower Valley**:
+  - Immersive Three.js nighttime botanical landscape with camera path animation and ambient soundscape.
+  - Full-screen `100vh` hero viewport on PC with smooth automatic scroll down to the dispatch console upon clicking **LET'S GO**.
+  - Dynamic GPU particle lighting and hover dispersal transitions.
+
+- **Instant OTP Resolution**:
+  - Automatically parses and extracts verification codes, security pins, and one-time passwords from incoming messages.
+  - High-visibility **OTP Hero Card** with monospaced digit formatting and instant 1-click copy.
+  - In-feed badge tags so you can grab codes straight from the message preview list.
+
+- **Dual Mode Message Reader**:
+  - **Clean Plain Text**: Stripped, high-contrast, distraction-free reading mode.
+  - **Rich HTML**: Secure sandboxed `iframe` rendering with `allow-popups` support for verification links.
+  - Attachment detection and format categorization.
+
+- **Mailbox Lifecycle & Durability**:
+  - Generate instant randomized inboxes (`@domain`) or pick custom local aliases (`user.alias@domain`).
+  - Saved inboxes drawer with multi-mailbox switching and state persistence across browser reloads via `localStorage`.
+  - Manual 1-click **Forget Mailbox** or auto-purge actions.
+
+- **Zero-Dependency Architecture**:
+  - Fully functional Node.js server (`server.js`) built strictly with standard built-in modules (`http`, `https`, `tls`, `fs`, `path`, `url`).
+  - Native Python server (`web.py`) and CLI utility (`cli.py`).
+  - Edge serverless compatibility ready for Vercel deployment.
+
+---
+
+## 🎮 How to Use
+
+1. **Visit the Console**: Open [https://custommails.vercel.app](https://custommails.vercel.app) or your local instance.
+2. **Generate a Mailbox**:
+   - Click **LET'S GO** to scroll into the console and provision an instant active mailbox.
+   - Or enter a custom alias in the **custom.alias** input and click **CREATE MAILBOX**.
+3. **Copy the Address**: Click **COPY** to copy your active disposable address to clipboard.
+4. **Receive OTP & Emails**: Paste the address into any service registration. Within seconds, your verification message will appear in the live feed.
+5. **Copy the Code**: Tap **COPY CODE** on the OTP banner to copy the 4–8 digit verification code instantly!
+
+---
+
+## 🚀 Running Locally
+
+### Option 1: Node.js (Zero external dependencies)
 ```bash
-cd ~/Desktop/custommails
-./run.sh              # Starts Zeltcon Checker at http://127.0.0.1:8788
+# Clone the repository
+git clone https://github.com/void4alt/custommails.git
+cd custommails
+
+# Start server
+npm start
+# or: node server.js
 ```
+Open [http://127.0.0.1:8788](http://127.0.0.1:8788) in your web browser.
 
-- **Main Dashboard**: [http://127.0.0.1:8788/](http://127.0.0.1:8788/)
-- **Fernhollow 3D Flower Valley Hero**: [http://127.0.0.1:8788/fernhollow](http://127.0.0.1:8788/fernhollow)
-- **Fernhollow 100% Inlined Standalone**: [http://127.0.0.1:8788/fernhollow-standalone](http://127.0.0.1:8788/fernhollow-standalone)
-
-Or run via Node.js or Python directly:
-
+### Option 2: Python 3
 ```bash
-# Node.js
-npm start            # or: node server.js
-
-# Python
 python3 web.py
 ```
 
-1. Pick a domain (loaded live from the API) or leave "Random Domain".
-2. Click **Create Inbox** or hit **⚡** for an instant random mailbox.
-3. Use that address wherever you need (signup/OTP).
-4. Watch the **Inbox** tab; click **Refresh**, or enable **auto-refresh** (polls every 8s).
-5. OTP codes are automatically detected and highlighted with a 1-click **Copy Code** hero banner.
-6. Check the **Spam** tab if messages are filtered.
-
-**Password**: Click **🔑** in the active toolbar to reveal the mailbox password, or open **↗** to log into webmail.
-
-## Key Features & Polish (/unslop)
-
-- **Interactive 3D Kinetic Prism**: Real-time Three.js geometric prism that reacts smoothly to cursor physics and pulses on mail activity. Zero bloat, throttles gracefully when backgrounded.
-- **Dual Server Engines (Node.js & Python)**: Complete zero-dependency Node.js server (`server.js`) and standard Python 3 server (`web.py`).
-- **Attractive Message Template**:
-  - High-contrast, legible typography with proper line-height and auto-hyperlinked URLs.
-  - Dedicated **Verification Code (OTP) Hero Card** with monospaced digits and tactile 1-click copy with instant visual checkmark.
-  - In-list OTP detection chips so you can copy verification codes directly without waiting for full emails to open.
-  - Tabbed Rich HTML view vs Clean Plain Text view.
-  - Iframe security sandbox configured with `allow-popups` so verification links open properly in new tabs.
-  - Attachment cards with format icons, file sizes, and 1-click download.
-- **Zero Glitches**:
-  - Fully responsive mobile drawer and "← Back to messages" navigation on narrow viewports.
-  - Asynchronous race condition prevention.
-  - Unblocked background auto-refresh that doesn't freeze when an email is open.
-  - Stored mailbox persistence in `localStorage`.
-  - Power-user keyboard shortcuts (`J`/`K` navigation, `C` copy address, `R` refresh, `/` search, `Esc` back).
-  the app fetches the complete message over **IMAP** (`mail.galaxium.art:993`, same mailbox
-  password) and renders it properly in a sandboxed frame.
-- The verification code is auto-extracted (the `code-text` block, or digits next to
-  "code/OTP/verification") and shown in a big **copy** banner at the top of the message.
-
-## API surface used
-
-| Feature | Endpoint |
-|---------|----------|
-| domains | `GET /v1/domains` |
-| create inbox | `POST /v1/inbox/create` `{domain, local_part}` |
-| list inbox | `POST /v1/inbox` `{email, password, page, per_page}` |
-| list spam | `POST /v1/spam` |
-| read message | `POST /v1/message` `{email, password, id}` |
-| read spam message | `POST /v1/spam/message` |
-| search | `POST /v1/search` `{email, password, query, ...}` |
-| attachment | `POST /v1/attachment` `{email, password, id, attachment_index}` |
-| count / key age / uptime | `POST /v1/count`, `GET /v1/key/age`, `GET /v1/uptime` |
-
-`page` is 0-based; `per_page` is 1–25 (default 10). Rate limit is 30 requests/min per key
-and 4 inbox creations/min, so auto-refresh is set to 8s.
-
-## CLI
-
+### Option 3: Command-Line Interface (CLI)
 ```bash
 python3 cli.py health
-python3 cli.py meta                  # mailbox count, key age, uptime
 python3 cli.py domains
-python3 cli.py new --domain galaxium.art --name myname
-python3 cli.py inboxes
-python3 cli.py list  you@galaxium.art --page 0 --per-page 10
-python3 cli.py list  you@galaxium.art --spam
-python3 cli.py read  you@galaxium.art <id>
-python3 cli.py search you@galaxium.art otp
-python3 cli.py attach you@galaxium.art <id> 0 -o file.pdf
-python3 cli.py reveal you@galaxium.art      # show password / webmail
-python3 cli.py forget you@galaxium.art      # remove from local store
+python3 cli.py create
 ```
 
-## Config (`config.json`)
+---
 
-```json
-{
-  "base_url": "https://api.galaxium.art",
-  "api_key": "YOUR_KEY",
-  "auth": { "header": "Authorization", "prefix": "Bearer " },
-  "timeout": 30,
-  "inbox_store": "inboxes.json",
-  "imap_port": 993,
-  "hide_domains": ["rape", "loliporn", "nigger", "foid", "mcvirgins", "killall", "mossad", "getfucked"]
-}
+## ☁️ Deploying to Vercel
+
+The project includes an optimized `vercel.json` and standalone root `server.js` handler:
+
+```bash
+# Install Vercel CLI if needed
+npm install -g vercel
+
+# Deploy directly
+vercel --prod
 ```
 
-- `imap_host` is optional; it defaults to the mailbox webmail host (`mail.galaxium.art`).
-  `imap_port` defaults to `993` (SSL).
+---
 
-- The key needs **Premium** on the Galaxium Discord. If it's rejected, regenerate it from
-  the Discord API panel.
-- `hide_domains` filters abusive domain names out of the picker.
-- A desktop browser `User-Agent` is sent because Cloudflare rejects the default Python UA.
+## 🛠️ Tech Stack
 
-## Files
+- **Client**: HTML5, Three.js WebGL, CSS Custom Properties, Vanilla JavaScript (ES6+).
+- **Audio**: Web Audio API ambient sound engine.
+- **Backend**: Node.js standard runtime (`http`/`https`/`tls`), Python 3 `http.server`.
+- **Hosting**: Vercel Edge Serverless Function & CDN.
 
-| File | Purpose |
-|------|---------|
-| `galaxium.py` | API client + local credential store |
-| `web.py` | local web server + API proxy |
-| `index.html` | dashboard UI |
-| `cli.py` | command-line client |
-| `config.json` | API key + settings |
-| `inboxes.json` | created mailboxes (contains passwords — private) |
-| `run.sh` | launcher |
+---
 
-## Troubleshooting
+## 📄 License
 
-- **`premium_required` / `invalid_api_key`** — key not premium or rotated; regenerate it.
-- **`mailbox_authentication_failed`** — stored password wrong; the mailbox may have been
-  created under a different key. Create a new inbox.
-- **`rate_limited` (429)** — slow down; wait `Retry-After` seconds.
-- **`domain_unavailable`** — pick another domain.
-- **Mail not arriving** — confirm the sending site accepted the address, wait a few
-  seconds, Refresh, and check the Spam tab.
+Distributed under the **MIT License**. See `LICENSE` for details.
+
+<div align="center">
+  <sub>Crafted with 📬 by <a href="https://github.com/void4alt">void4alt</a></sub>
+</div>

@@ -3,9 +3,12 @@ inboxes.json
 inboxes.json.tmp
 *.log
 *.png
+!assets/*.png
 __pycache__/
 *.pyc
 awesome-ai-agents/
 fernhollow-standalone.html
 .vercel/
 .vercel
+node_modules/
+.DS_Store
